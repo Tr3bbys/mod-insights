@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOD Insights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0e14;
+    --surface: #11161f;
+    --surface-2: #161c27;
+    --border: #232a37;
+    --text: #eef1f6;
+    --text-dim: #9aa4b5;
+    --text-faint: #5f6b7f;
+    --accent: #7c8cff;
+    --accent-2: #b17cff;
+    --ct: #5b9fee;
+    --t: #e0a458;
+    --good: #4ade80;
+    --warn: #f87171;
+    --goal: #7c8cff;
+  }
+  html { scroll-behavior: smooth; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif; font-size: 15px; line-height: 1.65;
+  }
+  h1, h2, h3, .nav-brand { font-family: 'Space Grotesk', 'Inter', sans-serif; }
+
+  nav {
+    position: sticky; top: 0; z-index: 10; background: rgba(10,14,20,0.85); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  }
+  .nav-brand { font-weight: 700; font-size: 17px; letter-spacing: -0.02em; }
+  .nav-brand span { background: linear-gradient(120deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .nav-links { display: flex; gap: 18px; font-size: 13px; }
+  .nav-links a { color: var(--text-dim); text-decoration: none; }
+  .nav-links a:hover { color: var(--text); }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 40px 32px 80px; }
+
+  .hero { padding: 20px 0 32px; border-bottom: 1px solid var(--border); margin-bottom: 32px; }
+  .hero .kicker { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-faint); margin-bottom: 8px; }
+  .hero h1 { font-size: 34px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.02em; }
+  .hero .meta { font-size: 13px; color: var(--text-dim); }
+
+  .focus-banner {
+    background: linear-gradient(135deg, rgba(124,140,255,0.12), rgba(177,124,255,0.08));
+    border: 1px solid rgba(124,140,255,0.25); border-radius: 14px; padding: 18px 22px; margin-bottom: 40px;
+  }
+  .focus-banner .tag { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+  .focus-banner p { margin: 0; font-size: 15.5px; font-weight: 500; }
+
+  section { margin-bottom: 48px; scroll-margin-top: 70px; }
+  .section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+  .section-num { font-family: 'Space Grotesk', sans-serif; font-size: 12px; color: var(--accent); font-weight: 600; background: rgba(124,140,255,0.12); border-radius: 6px; padding: 2px 8px; }
+  h2 { font-size: 20px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th { text-align: left; padding: 10px 12px; color: var(--text-faint); font-weight: 500; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); }
+  .name-cell { color: var(--text); font-weight: 500; }
+  .num { font-variant-numeric: tabular-nums; }
+  tr:last-child td { border-bottom: none; }
+
+  .badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .badge-high { background: rgba(74,222,128,0.15); color: var(--good); }
+  .badge-med { background: rgba(251,191,36,0.15); color: #fbbf24; }
+  .badge-low { background: rgba(248,113,113,0.15); color: var(--warn); }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px 22px; margin-bottom: 14px; }
+
+  .player-card-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .player-card-head h3 { margin: 0; font-size: 17px; font-weight: 600; }
+  .tags { display: flex; align-items: center; gap: 8px; }
+  .role-pill { background: var(--surface-2); border: 1px solid var(--border); border-radius: 20px; padding: 2px 10px; font-size: 11.5px; color: var(--text-dim); }
+  .games-label { font-size: 12px; color: var(--text-faint); }
+
+  .side-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 14px; }
+  .side-label { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 4px; }
+  .side-label.ct { color: var(--ct); }
+  .side-label.t { color: var(--t); }
+  .side-grid p { margin: 0; font-size: 13.5px; color: var(--text-dim); }
+  .side-grid ul { margin: 0; padding-left: 16px; font-size: 12.5px; color: var(--text-dim); }
+  .side-grid li { margin-bottom: 4px; }
+
+  .note-line { display: flex; gap: 8px; font-size: 13px; padding: 7px 0; }
+  .note-icon { font-weight: 700; width: 14px; flex-shrink: 0; }
+  .note-good { color: var(--text-dim); }
+  .note-good .note-icon { color: var(--good); }
+  .note-warn { color: var(--text-dim); }
+  .note-warn .note-icon { color: var(--warn); }
+  .note-goal { color: var(--text-dim); }
+  .note-goal .note-icon { color: var(--goal); }
+
+  .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+  .chart-box { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; }
+  .chart-box h4 { margin: 0 0 12px; font-size: 12.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-faint); font-weight: 600; }
+  .chart-wrap { position: relative; height: 220px; }
+  .legend { display: flex; gap: 16px; margin-top: 10px; font-size: 11.5px; color: var(--text-dim); }
+  .legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+
+  .weapon-note { font-size: 13px; color: var(--text-dim); padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .weapon-note:last-child { border-bottom: none; }
+  .weapon-note strong { color: var(--text); }
+
+  .pair-grid { display: grid; gap: 12px; }
+  .pair-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+  .pair-players { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .pair-card p { margin: 0; font-size: 13.5px; color: var(--text-dim); }
+  .provisional-note { font-size: 12.5px; color: var(--text-faint); font-style: italic; margin-bottom: 14px; }
+
+  .map-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .tab-btn { font-family: 'Inter', sans-serif; font-size: 12.5px; color: var(--text-dim); background: var(--surface); border: 1px solid var(--border); padding: 6px 14px; border-radius: 20px; cursor: pointer; transition: all 0.15s ease; }
+  .tab-btn:hover { color: var(--text); border-color: var(--accent); }
+  .tab-btn.active { color: #0a0e14; background: linear-gradient(120deg, var(--accent), var(--accent-2)); border-color: transparent; font-weight: 600; }
+  .map-card { display: none; }
+  .map-card.active { display: block; }
+  .map-card h3 { margin: 0 0 12px; font-size: 16px; }
+  .map-note { font-size: 12.5px; color: var(--text-faint); font-style: italic; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+
+  .pool-line { font-size: 13.5px; color: var(--text-dim); margin-bottom: 20px; }
+  .pool-line strong { color: var(--text); }
+
+  footer { text-align: center; padding: 30px 0 10px; color: var(--text-faint); font-size: 12px; border-top: 1px solid var(--border); margin-top: 40px; }
+
+  @media (max-width: 640px) {
+    .side-grid { grid-template-columns: 1fr; gap: 10px; }
+    .chart-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">MOD <span>Insights</span></div>
+  <div class="nav-links">
+    <a href="#summary">Summary</a>
+    <a href="#players">Players</a>
+    <a href="#weapons">Weapons</a>
+    <a href="#pairs">Pairs</a>
+    <a href="#maps">Maps</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kicker">Weekly squad report &middot; v6</div>
+    <h1>MOD Insights</h1>
+    <div class="meta">10 Aug 2026 &nbsp;&middot;&nbsp; Compiled from Leetify &amp; HLTV match data</div>
+  </div>
+
+  <div class="focus-banner">
+    <div class="tag">This week's focus</div>
+    <p>Treb's T-side entry gap (56% CT vs 40% T) is the single biggest lever on the team right now - see the aim training tracker for drill progress on this.</p>
+  </div>
+
+  <section id="summary">
+    <div class="section-label"><span class="section-num">01</span><h2>Quick summary</h2></div>
+    <table>
+      <tr><th>Player</th><th>Role</th><th>Games</th><th>Confidence</th><th>CT</th><th>T</th></tr>
+      <tr><td class="name-cell">the boy who lift</td><td>Fragger</td><td>235</td><td><span class="badge badge-high">High</span></td><td>Aggressive entry (mid/long doors)</td><td>Leads execute</td></tr>
+<tr><td class="name-cell">rosso</td><td>IGL (Captain)</td><td>76</td><td><span class="badge badge-med">Medium</span></td><td>Mid control, calls rotations</td><td>Trades, calls site</td></tr>
+<tr><td class="name-cell">Sandz</td><td>Support</td><td>55</td><td><span class="badge badge-med">Medium</span></td><td>Site anchor with util</td><td>Smokes/flashes the entry</td></tr>
+<tr><td class="name-cell">Sy</td><td>Lurker</td><td>9</td><td><span class="badge badge-low">Low</span></td><td>Flex, late-round closer</td><td>Second entry/lurk</td></tr>
+<tr><td class="name-cell">Treb</td><td>Anchor</td><td>50</td><td><span class="badge badge-med">Medium</span></td><td>Solo site hold</td><td>Lurk/late support</td></tr>
+    </table>
+
+    <div class="chart-grid">
+      <div class="chart-box">
+        <h4>HLTV rating</h4>
+        <div class="chart-wrap"><canvas id="ratingChart" role="img" aria-label="Bar chart of HLTV rating by player"></canvas></div>
+      </div>
+      <div class="chart-box">
+        <h4>Entry success, CT vs T</h4>
+        <div class="chart-wrap"><canvas id="entryChart" role="img" aria-label="Grouped bar chart of CT versus T entry success"></canvas></div>
+        <div class="legend"><span><span class="dot" style="background:#5b9fee"></span>CT</span><span><span class="dot" style="background:#e0a458"></span>T</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="players">
+    <div class="section-label"><span class="section-num">02</span><h2>Player detail</h2></div>
+    <div class="card player-card">
+  <div class="player-card-head">
+    <h3>the boy who lift</h3>
+    <div class="tags"><span class="role-pill">Fragger</span><span class="badge badge-high">High</span><span class="games-label">235 games</span></div>
+  </div>
+  <div class="side-grid">
+    <div><span class="side-label ct">CT</span><p>Aggressive peek on entry lanes to shut down T momentum early rather than sit passive.</p></div>
+    <div><span class="side-label t">T</span><p>First through on every default execute, wins the opening duel more often than not.</p></div>
+  </div>
+  <div class="note-line note-good"><span class="note-icon">+</span>Best entry success on both sides, ADR miles ahead of the squad - big sample so this is trustworthy</div>
+  <div class="note-line note-warn"><span class="note-icon">!</span>Team leans hard on him - if he's off, the whole T-side execute structure needs a backup plan</div>
+</div>
+<div class="card player-card">
+  <div class="player-card-head">
+    <h3>rosso</h3>
+    <div class="tags"><span class="role-pill">IGL (Captain)</span><span class="badge badge-med">Medium</span><span class="games-label">76 games</span></div>
+  </div>
+  <div class="side-grid">
+    <div><span class="side-label ct">CT</span><p>Sits mid/connector, reads info, calls the rotate.</p></div>
+    <div><span class="side-label t">T</span><p>Trades directly behind the entry, calls the site once contact's made.</p></div>
+  </div>
+  <div class="note-line note-good"><span class="note-icon">+</span>Balanced numbers everywhere, doesn't chase frags - exactly what you want calling the game</div>
+  <div class="note-line note-warn"><span class="note-icon">!</span>Nothing spikes as a standout stat, so the value here is leadership not raw firepower</div>
+</div>
+<div class="card player-card">
+  <div class="player-card-head">
+    <h3>Sandz</h3>
+    <div class="tags"><span class="role-pill">Support</span><span class="badge badge-med">Medium</span><span class="games-label">55 games</span></div>
+  </div>
+  <div class="side-grid">
+    <div><span class="side-label ct">CT</span><p>Anchors a site alongside util (smoke/molly entrances) rather than isolated duels.</p></div>
+    <div><span class="side-label t">T</span><p>Sets up the entry with smokes/flashes before the push.</p></div>
+  </div>
+  <div class="note-line note-good"><span class="note-icon">+</span>CT entry success clearly beats his T-side numbers - genuinely reads a hold well, that instinct is real</div>
+  <div class="note-line note-goal"><span class="note-icon">&#8594;</span>Next step is sharpening the aim side (crosshair, spray control) so the good positioning converts into more kills - a trainable gap, not a talent gap</div>
+</div>
+<div class="card player-card">
+  <div class="player-card-head">
+    <h3>Sy</h3>
+    <div class="tags"><span class="role-pill">Lurker</span><span class="badge badge-low">Low</span><span class="games-label">9 games</span></div>
+  </div>
+  <div class="side-grid">
+    <div><span class="side-label ct">CT</span><p>Flexible position, held for the late-round 1v1/1v2.</p></div>
+    <div><span class="side-label t">T</span><p>Second entry or lurk, depending on the call.</p></div>
+  </div>
+  <div class="note-line note-good"><span class="note-icon">+</span>Best clutch numbers on the team (80% 1v1, 36% 1v3)</div>
+  <div class="note-line note-warn"><span class="note-icon">!</span>Nowhere near enough games yet - revisit once past 30-40 games</div>
+</div>
+<div class="card player-card">
+  <div class="player-card-head">
+    <h3>Treb</h3>
+    <div class="tags"><span class="role-pill">Anchor</span><span class="badge badge-med">Medium</span><span class="games-label">50 games</span></div>
+  </div>
+  <div class="side-grid">
+    <div><span class="side-label ct">CT</span><p>Solo holds a site with util backing.</p></div>
+    <div><span class="side-label t">T</span><p>Lurks rather than entries - plays off the clutch instinct.</p></div>
+  </div>
+  <div class="note-line note-good"><span class="note-icon">+</span>Strongest CT numbers in the squad, solid 1v1 clutch rate (63%)</div>
+  <div class="note-line note-warn"><span class="note-icon">!</span>Clear gap between CT entry (56%) and T entry (40%) - biggest split on the team</div>
+</div>
+  </section>
+
+  <section id="weapons">
+    <div class="section-label"><span class="section-num">03</span><h2>Weapons</h2></div>
+    <table>
+      <tr><th>Player</th><th>Best T weapon</th><th>HS%</th><th>Best CT weapon</th><th>HS%</th></tr>
+      <tr><td class="name-cell">the boy who lift</td><td>AK47</td><td class="num">63%</td><td>M4A4</td><td class="num">54%</td></tr>
+<tr><td class="name-cell">rosso</td><td>AK47</td><td class="num">49%</td><td>M4A4</td><td class="num">49%</td></tr>
+<tr><td class="name-cell">Sandz</td><td>AK47</td><td class="num">47%</td><td>M4A1-S</td><td class="num">41%</td></tr>
+<tr><td class="name-cell">Sy</td><td>AK47</td><td class="num">68%</td><td>M4A4</td><td class="num">67%</td></tr>
+<tr><td class="name-cell">Treb</td><td>AK47</td><td class="num">58%</td><td>M4A1-S</td><td class="num">37%</td></tr>
+    </table>
+    <div class="weapon-note"><strong>the boy who lift</strong> &mdash; Noticeably stronger on M4A4 than M4A1-S (54% vs 44% HS) - worth actually running M4A4 on CT if he isn't already.</div>
+<div class="weapon-note"><strong>rosso</strong> &mdash; Dead even on both rifles - consistency shows up in loadout choice too, not just role.</div>
+<div class="weapon-note"><strong>Sandz</strong> &mdash; Most-used weapon overall is the P90 - tracks with a support role that plays a lot of eco and force-buy rounds rather than always full rifle economy.</div>
+<div class="weapon-note"><strong>Sy</strong> &mdash; Near-identical HS% on both rifles - strong on whichever side he's on, though still a small sample like everything else with him.</div>
+<div class="weapon-note"><strong>Treb</strong> &mdash; Big gap between rifles (58% vs 37% HS) - AK is clearly the stronger weapon, worth noting given the T-side positioning gap is separate from this and about entries, not aim.</div>
+  </section>
+
+  <section id="pairs">
+    <div class="section-label"><span class="section-num">04</span><h2>Best pairs</h2></div>
+    <div class="provisional-note">Based on Leetify's "Played With" data &mdash; actual duo win rates. Sy-involving pairs are still small sample (7&ndash;9 games), treat as an early signal.</div>
+    <div class="pair-grid"><div class="card pair-card">
+  <div class="pair-title">Highest win rate (small sample)</div>
+  <div class="pair-players">Sy + rosso</div>
+  <p>71% win rate over 7 games together - the best of any duo on the squad, though the sample is small. Every pairing involving Sy sits above the squad's baseline win rate, which is worth tracking as more games come in.</p>
+</div>
+<div class="card pair-card">
+  <div class="pair-title">Most proven pairing</div>
+  <div class="pair-players">Treb + Sandz</div>
+  <p>50 games together, 50% win rate - the biggest sample of any duo on the team and a reliable break-even return. Makes sense as a CT-side anchor pair given both read a hold rather than force duels.</p>
+</div>
+<div class="card pair-card">
+  <div class="pair-title">Entry duo</div>
+  <div class="pair-players">rosso + the boy who lift</div>
+  <p>28 games together, 50% win rate - confirms what the individual stats already suggested. Best fragger paired with the most reliable trader, and the data backs it up as the T-side engine.</p>
+</div></div>
+  </section>
+
+  <section id="maps">
+    <div class="section-label"><span class="section-num">05</span><h2>Map positioning</h2></div>
+    <div class="pool-line">Squad pool: <strong>Dust II, Inferno, Cache, Mirage, Nuke, Anubis, Ancient</strong></div>
+    <div class="map-tabs"><button type="button" class="tab-btn active" data-target="dust-ii">Dust II</button><button type="button" class="tab-btn" data-target="inferno">Inferno</button><button type="button" class="tab-btn" data-target="cache">Cache</button><button type="button" class="tab-btn" data-target="mirage">Mirage</button><button type="button" class="tab-btn" data-target="nuke">Nuke</button><button type="button" class="tab-btn" data-target="anubis">Anubis</button><button type="button" class="tab-btn" data-target="ancient">Ancient</button></div>
+    <div class="card map-card active" data-map="dust-ii">
+  <h3>Dust II</h3>
+  <div class="side-grid">
+    <div><span class="side-label ct">CT side</span><ul><li>the boy who lift - Long doors/pit, aggressive peek on long</li><li>Treb - B site anchor, holds default with util</li><li>Sandz - A site with Sy, holding CT spawn/short</li><li>Sy - A site/short, flexible, rotates late for the 1v1</li><li>rosso - Mid, calling rotations off info</li></ul></div>
+    <div><span class="side-label t">T side</span><ul><li>the boy who lift - Leads mid or long control</li><li>rosso - Trades directly behind, calls site off what opens</li><li>Sandz - Smokes cross on mid, or tunnels smoke on B execute</li><li>Sy - Second entry or lurk long/A ramp</li><li>Treb - Lurks B tunnels or Suicide, picks off a rotator solo</li></ul></div>
+  </div>
+  
+</div>
+<div class="card map-card" data-map="inferno">
+  <h3>Inferno</h3>
+  <div class="side-grid">
+    <div><span class="side-label ct">CT side</span><ul><li>the boy who lift - Banana, contests T's default banana control</li><li>Treb - A site anchor (default/pit)</li><li>Sandz - B site/apartments, molly/smoke apps entrance</li><li>Sy - B site with him, or banana support</li><li>rosso - Mid/CT spawn, calls off banana or apps pressure</li></ul></div>
+    <div><span class="side-label t">T side</span><ul><li>the boy who lift - Leads banana or apps push</li><li>rosso - Trades in, calls A or B off first contact</li><li>Sandz - Smokes CT on banana, or flashes apps entrance</li><li>Sy - Second entry through whichever site opens, or lurk library</li><li>Treb - Lurks second mid or arch</li></ul></div>
+  </div>
+  
+</div>
+<div class="card map-card" data-map="cache">
+  <h3>Cache</h3>
+  <div class="side-grid">
+    <div><span class="side-label ct">CT side</span><ul><li>the boy who lift - Contests mid early, aggressive</li><li>Treb - A site anchor (default hold)</li><li>Sandz - B site with util - smoke quad, molly window</li><li>Sy - B site, flex for late retake</li><li>rosso - Mid/connector, calls rotations</li></ul></div>
+    <div><span class="side-label t">T side</span><ul><li>the boy who lift - Leads mid or A main push</li><li>rosso - Trades in, calls A or B off contact</li><li>Sandz - Smokes CT on A, or quad smoke into B</li><li>Sy - Second entry or lurk vents</li><li>Treb - Lurks squeaky or checkers, late pick</li></ul></div>
+  </div>
+  
+</div>
+<div class="card map-card" data-map="mirage">
+  <h3>Mirage</h3>
+  <div class="side-grid">
+    <div><span class="side-label ct">CT side</span><ul><li>the boy who lift - Jungle/window, contests mid control</li><li>Treb - A site anchor (default/triple), his best side</li><li>Sandz - B site with Sy, window smoke/van</li><li>Sy - B site/apps, late clutch potential</li><li>rosso - CT spawn/connector, reads mid battle</li></ul></div>
+    <div><span class="side-label t">T side</span><ul><li>the boy who lift - Mid control or A ramp entry</li><li>rosso - Trades him in, calls A or B off mid</li><li>Sandz - Smokes CT on A, or window smoke into B</li><li>Sy - Flex, second on A execute or holding mid for a pick</li><li>Treb - Lurks apps or palace</li></ul></div>
+  </div>
+  
+</div>
+<div class="card map-card" data-map="nuke">
+  <h3>Nuke</h3>
+  <div class="side-grid">
+    <div><span class="side-label ct">CT side</span><ul><li>the boy who lift - Outside/hut, contests early T aggression toward secret or ramp</li><li>Treb - A site anchor (main default hold), or heaven if comfortable vertically</li><li>Sandz - B site (garage/yard) with util - smoke hut, molly link</li><li>Sy - B site, flexible for the late retake</li><li>rosso - Calls rotations from vents/rafters info, links A and B</li></ul></div>
+    <div><span class="side-label t">T side</span><ul><li>the boy who lift - Leads outside/ramp control or hut push</li><li>rosso - Trades in, calls A (ramp/hut) or B (garage) off contact</li><li>Sandz - Smokes heaven/hut, sets up the site take</li><li>Sy - Second entry or lurk secret</li><li>Treb - Lurks squeaky/silo, picks off late rotators</li></ul></div>
+  </div>
+  <div class="map-note">Nuke's verticality (heaven, vents, ramp) makes info calling more important than any other map - worth extra weight on rosso's role here specifically.</div>
+</div>
+<div class="card map-card" data-map="anubis">
+  <h3>Anubis</h3>
+  <div class="side-grid">
+    <div><span class="side-label ct">CT side</span><ul><li>the boy who lift - Contests mid/palace early, aggressive</li><li>Treb - A site anchor (site default hold)</li><li>Sandz - B site with util - smoke connector, molly water</li><li>Sy - B site, flex for late clutch</li><li>rosso - Mid/connector, calls rotations</li></ul></div>
+    <div><span class="side-label t">T side</span><ul><li>the boy who lift - Leads mid or palace control</li><li>rosso - Trades in, calls A or B off what mid/palace gives</li><li>Sandz - Smokes CT on A, or connector smoke into B</li><li>Sy - Second entry or lurk canal</li><li>Treb - Lurks heaven or water, late-round pick</li></ul></div>
+  </div>
+  <div class="map-note">Squad's newest map based on your match history - worth flagging this positioning as more provisional than Dust II/Mirage/Inferno until you've got more reps on it.</div>
+</div>
+<div class="card map-card" data-map="ancient">
+  <h3>Ancient</h3>
+  <div class="side-grid">
+    <div><span class="side-label ct">CT side</span><ul><li>the boy who lift - Contests mid/donut early, aggressive</li><li>Treb - A site anchor (default hold)</li><li>Sandz - B site with util - smoke cave, molly main</li><li>Sy - B site, flex for late retake</li><li>rosso - Mid, calls rotations off donut control</li></ul></div>
+    <div><span class="side-label t">T side</span><ul><li>the boy who lift - Leads mid or main push</li><li>rosso - Trades in, calls A or B off contact</li><li>Sandz - Smokes CT on A, or cave smoke into B</li><li>Sy - Second entry or lurk red/blue</li><li>Treb - Lurks side or elbow, late pick</li></ul></div>
+  </div>
+  
+</div>
+  </section>
+
+  <footer>MOD Insights &middot; updated weekly &middot; generated from report_data.py</footer>
+
+</div>
+
+<script>
+const isDark = true;
+const ink = '#eef1f6';
+const dim = '#9aa4b5';
+const grid = '#232a37';
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const target = btn.getAttribute('data-target');
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.map-card').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelector(`.map-card[data-map="${target}"]`).classList.add('active');
+    return false;
+  });
+});
+
+new Chart(document.getElementById('ratingChart'), {
+  type: 'bar',
+  data: {
+    labels: ['the boy who lift', 'rosso', 'Sandz', 'Sy', 'Treb'],
+    datasets: [{ data: [1.25, 1.07, 0.91, 1.34, 1.14], backgroundColor: '#7c8cff', borderRadius: 6, maxBarThickness: 34 }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { backgroundColor: '#161c27', borderColor: '#232a37', borderWidth: 1, titleColor: ink, bodyColor: ink } },
+    scales: {
+      y: { beginAtZero: true, max: 1.5, grid: { color: grid }, ticks: { color: dim, font: { size: 11 } } },
+      x: { grid: { display: false }, ticks: { color: dim, font: { size: 10.5 } } }
+    }
+  }
+});
+
+new Chart(document.getElementById('entryChart'), {
+  type: 'bar',
+  data: {
+    labels: ['the boy who lift', 'rosso', 'Sandz', 'Sy', 'Treb'],
+    datasets: [
+      { label: 'CT', data: [58, 47, 51, 62, 56], backgroundColor: '#5b9fee', borderRadius: 6, maxBarThickness: 16 },
+      { label: 'T', data: [50, 51, 45, 56, 40], backgroundColor: '#e0a458', borderRadius: 6, maxBarThickness: 16 }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { backgroundColor: '#161c27', borderColor: '#232a37', borderWidth: 1, titleColor: ink, bodyColor: ink } },
+    scales: {
+      y: { beginAtZero: true, max: 70, grid: { color: grid }, ticks: { color: dim, font: { size: 11 }, callback: (v) => v + '%' } },
+      x: { grid: { display: false }, ticks: { color: dim, font: { size: 10.5 } } }
+    }
+  }
+});
+</script>
+
+</body>
+</html>
