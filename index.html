@@ -136,11 +136,23 @@
   .pool-line { font-size: 13.5px; color: var(--text-dim); margin-bottom: 20px; }
   .pool-line strong { color: var(--text); }
 
+  .form-overview { display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px; }
+  .form-record { font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 700; }
+  .form-record-label { font-size: 13px; color: var(--text-dim); }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .form-sub { font-size: 11.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-faint); font-weight: 600; margin: 0 0 8px; }
+  tr.win td { }
+  tr.loss td { }
+  .result-badge { display: inline-block; width: 20px; text-align: center; border-radius: 5px; font-size: 11px; font-weight: 700; padding: 1px 0; }
+  .result-badge.win { background: rgba(74,222,128,0.15); color: var(--good); }
+  .result-badge.loss { background: rgba(248,113,113,0.15); color: var(--warn); }
+
   footer { text-align: center; padding: 30px 0 10px; color: var(--text-faint); font-size: 12px; border-top: 1px solid var(--border); margin-top: 40px; }
 
   @media (max-width: 640px) {
     .side-grid { grid-template-columns: 1fr; gap: 10px; }
     .chart-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
     .hero { flex-direction: column-reverse; text-align: center; }
     .squad-banner { width: 90px; height: 90px; }
@@ -155,6 +167,7 @@
     <a href="#summary">Summary</a>
     <a href="#players">Players</a>
     <a href="#weapons">Weapons</a>
+    <a href="#form">Form</a>
     <a href="#pairs">Pairs</a>
     <a href="#maps">Maps</a>
   </div>
@@ -164,7 +177,7 @@
 
   <div class="hero">
     <div class="hero-text">
-      <div class="kicker">Weekly squad report &middot; v6</div>
+      <div class="kicker">Weekly squad report &middot; v7</div>
       <h1>MOD Insights</h1>
       <div class="meta">10 Aug 2026 &nbsp;&middot;&nbsp; Compiled from Leetify &amp; HLTV match data</div>
     </div>
@@ -173,7 +186,7 @@
 
   <div class="focus-banner">
     <div class="tag">This week's focus</div>
-    <p>Treb's T-side entry gap (56% CT vs 40% T) is the single biggest lever on the team right now - see the aim training tracker for drill progress on this.</p>
+    <p>Dust II is 3-0 in Premier and Ancient/Anubis/Cache are 0-1 each - worth weighting veto strategy toward Dust II/Inferno until the weaker maps get more reps.</p>
   </div>
 
   <section id="summary">
@@ -296,8 +309,48 @@
 <div class="weapon-note"><strong>Treb</strong> &mdash; Big gap between rifles (58% vs 37% HS) - AK is clearly the stronger weapon, worth noting given the T-side positioning gap is separate from this and about entries, not aim.</div>
   </section>
 
+  <section id="form">
+    <div class="section-label"><span class="section-num">04</span><h2>Recent form</h2></div>
+    <div class="provisional-note">Premier matchmaking results. Based on Premier matchmaking results (ranked veto). Small sample per map, especially outside Dust II - read as an early signal, not settled form.</div>
+
+    <div class="form-overview">
+      <div class="form-record">5-4</div>
+      <div class="form-record-label">Last 9 games &middot; 56% win rate</div>
+    </div>
+
+    <div class="form-grid">
+      <div>
+        <h4 class="form-sub">By map</h4>
+        <table>
+          <tr><th>Map</th><th>Record</th><th>Win rate</th><th>Games</th></tr>
+          <tr><td class="name-cell">Dust II</td><td class="num">3-0</td><td class="num">100%</td><td>3</td></tr>
+<tr><td class="name-cell">Inferno</td><td class="num">1-0</td><td class="num">100%</td><td>1</td></tr>
+<tr><td class="name-cell">Mirage</td><td class="num">1-1</td><td class="num">50%</td><td>2</td></tr>
+<tr><td class="name-cell">Ancient</td><td class="num">0-1</td><td class="num">0%</td><td>1</td></tr>
+<tr><td class="name-cell">Anubis</td><td class="num">0-1</td><td class="num">0%</td><td>1</td></tr>
+<tr><td class="name-cell">Cache</td><td class="num">0-1</td><td class="num">0%</td><td>1</td></tr>
+        </table>
+      </div>
+      <div>
+        <h4 class="form-sub">Match log</h4>
+        <table>
+          <tr><th>Date</th><th>Map</th><th>Score</th><th></th></tr>
+          <tr class="win"><td>15 hours ago</td><td>Dust II</td><td class="num">13 : 9</td><td><span class="result-badge win">W</span></td></tr>
+<tr class="win"><td>15 hours ago</td><td>Inferno</td><td class="num">9 : 1</td><td><span class="result-badge win">W</span></td></tr>
+<tr class="win"><td>16 hours ago</td><td>Dust II</td><td class="num">13 : 5</td><td><span class="result-badge win">W</span></td></tr>
+<tr class="loss"><td>Yesterday</td><td>Mirage</td><td class="num">11 : 13</td><td><span class="result-badge loss">L</span></td></tr>
+<tr class="loss"><td>Yesterday</td><td>Ancient</td><td class="num">7 : 13</td><td><span class="result-badge loss">L</span></td></tr>
+<tr class="win"><td>Fri, 7 Aug 26</td><td>Mirage</td><td class="num">13 : 11</td><td><span class="result-badge win">W</span></td></tr>
+<tr class="loss"><td>Fri, 7 Aug 26</td><td>Anubis</td><td class="num">10 : 13</td><td><span class="result-badge loss">L</span></td></tr>
+<tr class="loss"><td>Fri, 7 Aug 26</td><td>Cache</td><td class="num">11 : 13</td><td><span class="result-badge loss">L</span></td></tr>
+<tr class="win"><td>Fri, 7 Aug 26</td><td>Dust II</td><td class="num">13 : 3</td><td><span class="result-badge win">W</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
   <section id="pairs">
-    <div class="section-label"><span class="section-num">04</span><h2>Best pairs</h2></div>
+    <div class="section-label"><span class="section-num">05</span><h2>Best pairs</h2></div>
     <div class="provisional-note">Based on Leetify's "Played With" data &mdash; actual duo win rates. Sy-involving pairs are still small sample (7&ndash;9 games), treat as an early signal.</div>
     <div class="pair-grid"><div class="card pair-card">
   <div class="pair-title">Highest win rate (small sample)</div>
@@ -317,7 +370,7 @@
   </section>
 
   <section id="maps">
-    <div class="section-label"><span class="section-num">05</span><h2>Map positioning</h2></div>
+    <div class="section-label"><span class="section-num">06</span><h2>Map positioning</h2></div>
     <div class="pool-line">Squad pool: <strong>Dust II, Inferno, Cache, Mirage, Nuke, Anubis, Ancient</strong></div>
     <div class="map-tabs"><button type="button" class="tab-btn active" data-target="dust-ii">Dust II</button><button type="button" class="tab-btn" data-target="inferno">Inferno</button><button type="button" class="tab-btn" data-target="cache">Cache</button><button type="button" class="tab-btn" data-target="mirage">Mirage</button><button type="button" class="tab-btn" data-target="nuke">Nuke</button><button type="button" class="tab-btn" data-target="anubis">Anubis</button><button type="button" class="tab-btn" data-target="ancient">Ancient</button></div>
     <div class="card map-card active" data-map="dust-ii">
