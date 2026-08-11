@@ -1,0 +1,419 @@
+{
+  "report_meta": {
+    "version": "v7",
+    "date": "10 Aug 2026",
+    "changelog": "Added Recent Form section - actual Premier match results (5-4, 56% WR). Dust II and Inferno are perfect so far, Ancient/Anubis/Cache are 0% (1 game each).",
+    "weekly_focus": "Dust II is 3-0 in Premier and Ancient/Anubis/Cache are 0-1 each - worth weighting veto strategy toward Dust II/Inferno until the weaker maps get more reps."
+  },
+  "tiers": {
+    "high": {
+      "label": "High",
+      "games": "100+",
+      "meaning": "Numbers are stable, trust the trend"
+    },
+    "med": {
+      "label": "Medium",
+      "games": "50-99",
+      "meaning": "Broad picture is solid, specific splits still settling"
+    },
+    "low": {
+      "label": "Low",
+      "games": "Under 50",
+      "meaning": "Early days - treat as promising, not proven"
+    }
+  },
+  "players": [
+    {
+      "name": "the boy who lift",
+      "role": "Fragger",
+      "games": 235,
+      "tier": "high",
+      "ct_role": "Aggressive entry (mid/long doors)",
+      "t_role": "Leads execute",
+      "ct_detail": "Aggressive peek on entry lanes to shut down T momentum early rather than sit passive.",
+      "t_detail": "First through on every default execute, wins the opening duel more often than not.",
+      "good": "Best entry success on both sides, ADR miles ahead of the squad - big sample so this is trustworthy",
+      "note": "Team leans hard on him - if he's off, the whole T-side execute structure needs a backup plan",
+      "note_type": "warn",
+      "best_t_weapon": "AK47",
+      "best_t_hs": "63%",
+      "best_ct_weapon": "M4A4",
+      "best_ct_hs": "54%",
+      "weapon_note": "Noticeably stronger on M4A4 than M4A1-S (54% vs 44% HS) - worth actually running M4A4 on CT if he isn't already.",
+      "avatar": "assets/dan.jpg"
+    },
+    {
+      "name": "rosso",
+      "role": "IGL (Captain)",
+      "games": 76,
+      "tier": "med",
+      "ct_role": "Mid control, calls rotations",
+      "t_role": "Trades, calls site",
+      "ct_detail": "Sits mid/connector, reads info, calls the rotate.",
+      "t_detail": "Trades directly behind the entry, calls the site once contact's made.",
+      "good": "Balanced numbers everywhere, doesn't chase frags - exactly what you want calling the game",
+      "note": "Nothing spikes as a standout stat, so the value here is leadership not raw firepower",
+      "note_type": "warn",
+      "best_t_weapon": "AK47",
+      "best_t_hs": "49%",
+      "best_ct_weapon": "M4A4",
+      "best_ct_hs": "49%",
+      "weapon_note": "Dead even on both rifles - consistency shows up in loadout choice too, not just role.",
+      "avatar": "assets/rosso.jpg"
+    },
+    {
+      "name": "Sandz",
+      "role": "Support",
+      "games": 55,
+      "tier": "med",
+      "ct_role": "Site anchor with util",
+      "t_role": "Smokes/flashes the entry",
+      "ct_detail": "Anchors a site alongside util (smoke/molly entrances) rather than isolated duels.",
+      "t_detail": "Sets up the entry with smokes/flashes before the push.",
+      "good": "CT entry success clearly beats his T-side numbers - genuinely reads a hold well, that instinct is real",
+      "note": "Next step is sharpening the aim side (crosshair, spray control) so the good positioning converts into more kills - a trainable gap, not a talent gap",
+      "note_type": "goal",
+      "best_t_weapon": "AK47",
+      "best_t_hs": "47%",
+      "best_ct_weapon": "M4A1-S",
+      "best_ct_hs": "41%",
+      "weapon_note": "Most-used weapon overall is the P90 - tracks with a support role that plays a lot of eco and force-buy rounds rather than always full rifle economy.",
+      "avatar": "assets/sandz.jpg"
+    },
+    {
+      "name": "Sy",
+      "role": "Lurker",
+      "games": 9,
+      "tier": "low",
+      "ct_role": "Flex, late-round closer",
+      "t_role": "Second entry/lurk",
+      "ct_detail": "Flexible position, held for the late-round 1v1/1v2.",
+      "t_detail": "Second entry or lurk, depending on the call.",
+      "good": "Best clutch numbers on the team (80% 1v1, 36% 1v3)",
+      "note": "Nowhere near enough games yet - revisit once past 30-40 games",
+      "note_type": "warn",
+      "best_t_weapon": "AK47",
+      "best_t_hs": "68%",
+      "best_ct_weapon": "M4A4",
+      "best_ct_hs": "67%",
+      "weapon_note": "Near-identical HS% on both rifles - strong on whichever side he's on, though still a small sample like everything else with him.",
+      "avatar": "assets/sy.jpg"
+    },
+    {
+      "name": "Treb",
+      "role": "Anchor",
+      "games": 50,
+      "tier": "med",
+      "ct_role": "Solo site hold",
+      "t_role": "Lurk/late support",
+      "ct_detail": "Solo holds a site with util backing.",
+      "t_detail": "Lurks rather than entries - plays off the clutch instinct.",
+      "good": "Strongest CT numbers in the squad, solid 1v1 clutch rate (63%)",
+      "note": "Clear gap between CT entry (56%) and T entry (40%) - biggest split on the team",
+      "note_type": "warn",
+      "best_t_weapon": "AK47",
+      "best_t_hs": "58%",
+      "best_ct_weapon": "M4A1-S",
+      "best_ct_hs": "37%",
+      "weapon_note": "Big gap between rifles (58% vs 37% HS) - AK is clearly the stronger weapon, worth noting given the T-side positioning gap is separate from this and about entries, not aim.",
+      "avatar": "assets/treb.jpg"
+    }
+  ],
+  "chart_data": {
+    "hltv_rating": {
+      "the boy who lift": 1.25,
+      "rosso": 1.07,
+      "Sy": 1.34,
+      "Sandz": 0.91,
+      "Treb": 1.14
+    },
+    "ct_entry_success": {
+      "the boy who lift": 58,
+      "rosso": 47,
+      "Sy": 62,
+      "Sandz": 51,
+      "Treb": 56
+    },
+    "t_entry_success": {
+      "the boy who lift": 50,
+      "rosso": 51,
+      "Sy": 56,
+      "Sandz": 45,
+      "Treb": 40
+    }
+  },
+  "best_pairs": [
+    {
+      "title": "Highest win rate (small sample)",
+      "players": "Sy + rosso",
+      "reasoning": "71% win rate over 7 games together - the best of any duo on the squad, though the sample is small. Every pairing involving Sy sits above the squad's baseline win rate, which is worth tracking as more games come in."
+    },
+    {
+      "title": "Most proven pairing",
+      "players": "Treb + Sandz",
+      "reasoning": "50 games together, 50% win rate - the biggest sample of any duo on the team and a reliable break-even return. Makes sense as a CT-side anchor pair given both read a hold rather than force duels."
+    },
+    {
+      "title": "Entry duo",
+      "players": "rosso + the boy who lift",
+      "reasoning": "28 games together, 50% win rate - confirms what the individual stats already suggested. Best fragger paired with the most reliable trader, and the data backs it up as the T-side engine."
+    }
+  ],
+  "maps": [
+    {
+      "name": "Dust II",
+      "ct": [
+        "the boy who lift - Long doors/pit, aggressive peek on long",
+        "Treb - B site anchor, holds default with util",
+        "Sandz - A site with Sy, holding CT spawn/short",
+        "Sy - A site/short, flexible, rotates late for the 1v1",
+        "rosso - Mid, calling rotations off info"
+      ],
+      "t": [
+        "the boy who lift - Leads mid or long control",
+        "rosso - Trades directly behind, calls site off what opens",
+        "Sandz - Smokes cross on mid, or tunnels smoke on B execute",
+        "Sy - Second entry or lurk long/A ramp",
+        "Treb - Lurks B tunnels or Suicide, picks off a rotator solo"
+      ],
+      "note": null
+    },
+    {
+      "name": "Inferno",
+      "ct": [
+        "the boy who lift - Banana, contests T's default banana control",
+        "Treb - A site anchor (default/pit)",
+        "Sandz - B site/apartments, molly/smoke apps entrance",
+        "Sy - B site with him, or banana support",
+        "rosso - Mid/CT spawn, calls off banana or apps pressure"
+      ],
+      "t": [
+        "the boy who lift - Leads banana or apps push",
+        "rosso - Trades in, calls A or B off first contact",
+        "Sandz - Smokes CT on banana, or flashes apps entrance",
+        "Sy - Second entry through whichever site opens, or lurk library",
+        "Treb - Lurks second mid or arch"
+      ],
+      "note": null
+    },
+    {
+      "name": "Cache",
+      "ct": [
+        "the boy who lift - Contests mid early, aggressive",
+        "Treb - A site anchor (default hold)",
+        "Sandz - B site with util - smoke quad, molly window",
+        "Sy - B site, flex for late retake",
+        "rosso - Mid/connector, calls rotations"
+      ],
+      "t": [
+        "the boy who lift - Leads mid or A main push",
+        "rosso - Trades in, calls A or B off contact",
+        "Sandz - Smokes CT on A, or quad smoke into B",
+        "Sy - Second entry or lurk vents",
+        "Treb - Lurks squeaky or checkers, late pick"
+      ],
+      "note": null
+    },
+    {
+      "name": "Mirage",
+      "ct": [
+        "the boy who lift - Jungle/window, contests mid control",
+        "Treb - A site anchor (default/triple), his best side",
+        "Sandz - B site with Sy, window smoke/van",
+        "Sy - B site/apps, late clutch potential",
+        "rosso - CT spawn/connector, reads mid battle"
+      ],
+      "t": [
+        "the boy who lift - Mid control or A ramp entry",
+        "rosso - Trades him in, calls A or B off mid",
+        "Sandz - Smokes CT on A, or window smoke into B",
+        "Sy - Flex, second on A execute or holding mid for a pick",
+        "Treb - Lurks apps or palace"
+      ],
+      "note": null
+    },
+    {
+      "name": "Nuke",
+      "ct": [
+        "the boy who lift - Outside/hut, contests early T aggression toward secret or ramp",
+        "Treb - A site anchor (main default hold), or heaven if comfortable vertically",
+        "Sandz - B site (garage/yard) with util - smoke hut, molly link",
+        "Sy - B site, flexible for the late retake",
+        "rosso - Calls rotations from vents/rafters info, links A and B"
+      ],
+      "t": [
+        "the boy who lift - Leads outside/ramp control or hut push",
+        "rosso - Trades in, calls A (ramp/hut) or B (garage) off contact",
+        "Sandz - Smokes heaven/hut, sets up the site take",
+        "Sy - Second entry or lurk secret",
+        "Treb - Lurks squeaky/silo, picks off late rotators"
+      ],
+      "note": "Nuke's verticality (heaven, vents, ramp) makes info calling more important than any other map - worth extra weight on rosso's role here specifically."
+    },
+    {
+      "name": "Anubis",
+      "ct": [
+        "the boy who lift - Contests mid/palace early, aggressive",
+        "Treb - A site anchor (site default hold)",
+        "Sandz - B site with util - smoke connector, molly water",
+        "Sy - B site, flex for late clutch",
+        "rosso - Mid/connector, calls rotations"
+      ],
+      "t": [
+        "the boy who lift - Leads mid or palace control",
+        "rosso - Trades in, calls A or B off what mid/palace gives",
+        "Sandz - Smokes CT on A, or connector smoke into B",
+        "Sy - Second entry or lurk canal",
+        "Treb - Lurks heaven or water, late-round pick"
+      ],
+      "note": "Squad's newest map based on your match history - worth flagging this positioning as more provisional than Dust II/Mirage/Inferno until you've got more reps on it."
+    },
+    {
+      "name": "Ancient",
+      "ct": [
+        "the boy who lift - Contests mid/donut early, aggressive",
+        "Treb - A site anchor (default hold)",
+        "Sandz - B site with util - smoke cave, molly main",
+        "Sy - B site, flex for late retake",
+        "rosso - Mid, calls rotations off donut control"
+      ],
+      "t": [
+        "the boy who lift - Leads mid or main push",
+        "rosso - Trades in, calls A or B off contact",
+        "Sandz - Smokes CT on A, or cave smoke into B",
+        "Sy - Second entry or lurk red/blue",
+        "Treb - Lurks side or elbow, late pick"
+      ],
+      "note": null
+    }
+  ],
+  "overpass": {
+    "name": "Overpass (official Active Duty 7th map, not in squad's chosen pool)",
+    "ct": [
+      "the boy who lift - Contests bathroom/monster early, aggressive",
+      "Treb - B site anchor (default hold, playground)",
+      "Sandz - A site with util - smoke long/bar, molly connector",
+      "Sy - A site, flex for late retake",
+      "rosso - Calls from short/connector, links A and B"
+    ],
+    "t": [
+      "the boy who lift - Leads bathroom or long control",
+      "rosso - Trades in, calls A or B off contact",
+      "Sandz - Smokes CT on A, or bathroom smoke into B",
+      "Sy - Second entry or lurk bank",
+      "Treb - Lurks toilets or heaven, late pick"
+    ]
+  },
+  "recent_form": {
+    "mode": "Premier",
+    "note": "Based on Premier matchmaking results (ranked veto). Small sample per map, especially outside Dust II - read as an early signal, not settled form.",
+    "overall": {
+      "wins": 5,
+      "losses": 4,
+      "win_rate": 56
+    },
+    "matches": [
+      {
+        "date": "15 hours ago",
+        "map": "Dust II",
+        "us": 13,
+        "them": 9,
+        "result": "W"
+      },
+      {
+        "date": "15 hours ago",
+        "map": "Inferno",
+        "us": 9,
+        "them": 1,
+        "result": "W"
+      },
+      {
+        "date": "16 hours ago",
+        "map": "Dust II",
+        "us": 13,
+        "them": 5,
+        "result": "W"
+      },
+      {
+        "date": "Yesterday",
+        "map": "Mirage",
+        "us": 11,
+        "them": 13,
+        "result": "L"
+      },
+      {
+        "date": "Yesterday",
+        "map": "Ancient",
+        "us": 7,
+        "them": 13,
+        "result": "L"
+      },
+      {
+        "date": "Fri, 7 Aug 26",
+        "map": "Mirage",
+        "us": 13,
+        "them": 11,
+        "result": "W"
+      },
+      {
+        "date": "Fri, 7 Aug 26",
+        "map": "Anubis",
+        "us": 10,
+        "them": 13,
+        "result": "L"
+      },
+      {
+        "date": "Fri, 7 Aug 26",
+        "map": "Cache",
+        "us": 11,
+        "them": 13,
+        "result": "L"
+      },
+      {
+        "date": "Fri, 7 Aug 26",
+        "map": "Dust II",
+        "us": 13,
+        "them": 3,
+        "result": "W"
+      }
+    ],
+    "by_map": {
+      "Dust II": {
+        "w": 3,
+        "l": 0,
+        "win_rate": 100,
+        "games": 3
+      },
+      "Inferno": {
+        "w": 1,
+        "l": 0,
+        "win_rate": 100,
+        "games": 1
+      },
+      "Mirage": {
+        "w": 1,
+        "l": 1,
+        "win_rate": 50,
+        "games": 2
+      },
+      "Ancient": {
+        "w": 0,
+        "l": 1,
+        "win_rate": 0,
+        "games": 1
+      },
+      "Anubis": {
+        "w": 0,
+        "l": 1,
+        "win_rate": 0,
+        "games": 1
+      },
+      "Cache": {
+        "w": 0,
+        "l": 1,
+        "win_rate": 0,
+        "games": 1
+      }
+    }
+  }
+}
