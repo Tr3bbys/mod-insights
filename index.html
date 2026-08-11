@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOD Insights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0906;
+    --surface: #17140f;
+    --surface-2: #1e1a13;
+    --border: #332a1d;
+    --text: #f2ede2;
+    --text-dim: #b3a894;
+    --text-faint: #6b6152;
+    --accent: #e8752a;
+    --accent-2: #f2a33d;
+    --ct: #5b9fee;
+    --t: #e0a458;
+    --good: #4ade80;
+    --warn: #f87171;
+    --goal: #f2a33d;
+  }
+  html { scroll-behavior: smooth; }
+  * { box-sizing: border-box; }
+  h1, h2, h3, .nav-brand, .form-record { font-family: 'Oswald', 'Inter', sans-serif; text-transform: uppercase; letter-spacing: 0.02em; }
+  body {
+    margin: 0; color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif; font-size: 15px; line-height: 1.65;
+    background-image: linear-gradient(rgba(10,9,6,0.90), rgba(10,9,6,0.95)), url('assets/bg.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 10; background: rgba(8,7,5,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  }
+  .nav-brand { font-weight: 700; font-size: 17px; letter-spacing: 0.03em; display: flex; align-items: center; gap: 10px; }
+  .nav-brand img { height: 30px; width: auto; }
+  .nav-brand span { background: linear-gradient(120deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .nav-links { display: flex; gap: 18px; font-size: 13px; }
+  .nav-links a { color: var(--text-dim); text-decoration: none; text-transform: none; letter-spacing: normal; font-family: 'Inter', sans-serif; }
+  .nav-links a:hover { color: var(--text); }
+
+  .wrap { max-width: 880px; margin: 0 auto; padding: 40px 32px 80px; }
+
+  .hero { padding: 20px 0 32px; border-bottom: 1px solid var(--border); margin-bottom: 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .hero-text { flex: 1; min-width: 0; }
+  .hero .kicker { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-faint); margin-bottom: 8px; font-family: 'Inter', sans-serif; }
+  .hero h1 { font-size: 36px; font-weight: 700; margin: 0 0 6px; background: linear-gradient(120deg, var(--text), var(--accent-2) 140%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero .meta { font-size: 13px; color: var(--text-dim); }
+  .squad-banner { width: 130px; height: 130px; border-radius: 16px; object-fit: cover; border: 2px solid var(--accent); flex-shrink: 0; box-shadow: 0 0 24px rgba(232,117,42,0.25); }
+
+  .focus-banner {
+    background: linear-gradient(135deg, rgba(232,117,42,0.14), rgba(242,163,61,0.08));
+    border: 1px solid rgba(232,117,42,0.3); border-radius: 14px; padding: 18px 22px; margin-bottom: 40px;
+  }
+  .focus-banner .tag { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+  .focus-banner p { margin: 0; font-size: 15.5px; font-weight: 500; }
+
+  section { margin-bottom: 48px; scroll-margin-top: 70px; }
+  .section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+  .section-num { font-family: 'Oswald', sans-serif; font-size: 12px; color: var(--accent); font-weight: 600; background: rgba(232,117,42,0.14); border-radius: 6px; padding: 2px 8px; }
+  h2 { font-size: 20px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th { text-align: left; padding: 10px 12px; color: var(--text-faint); font-weight: 500; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text-dim); vertical-align: middle; }
+  .name-cell { color: var(--text); font-weight: 500; }
+  .name-wrap { display: flex; align-items: center; gap: 8px; }
+  .avatar-mini { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border); flex-shrink: 0; }
+  .num { font-variant-numeric: tabular-nums; }
+  tr:last-child td { border-bottom: none; }
+
+  .badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .badge-high { background: rgba(74,222,128,0.15); color: var(--good); }
+  .badge-med { background: rgba(251,191,36,0.15); color: #fbbf24; }
+  .badge-low { background: rgba(248,113,113,0.15); color: var(--warn); }
+
+  .card { background: rgba(23,20,15,0.92); border: 1px solid var(--border); border-radius: 14px; padding: 20px 22px; margin-bottom: 14px; backdrop-filter: blur(4px); }
+
+  .player-card-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .avatar { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); flex-shrink: 0; }
+  .player-head-text { flex: 1; min-width: 0; }
+  .player-card-head h3 { margin: 0 0 4px; font-size: 17px; font-weight: 600; font-family: 'Inter', sans-serif; text-transform: none; letter-spacing: normal; }
+  .tags { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .role-pill { background: var(--surface-2); border: 1px solid var(--border); border-radius: 20px; padding: 2px 10px; font-size: 11.5px; color: var(--text-dim); }
+  .games-label { font-size: 12px; color: var(--text-faint); }
+
+  .side-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 14px; }
+  .side-label { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 4px; }
+  .side-label.ct { color: var(--ct); }
+  .side-label.t { color: var(--t); }
+  .side-grid p { margin: 0; font-size: 13.5px; color: var(--text-dim); }
+  .side-grid ul { margin: 0; padding-left: 16px; font-size: 12.5px; color: var(--text-dim); }
+  .side-grid li { margin-bottom: 4px; }
+
+  .note-line { display: flex; gap: 8px; font-size: 13px; padding: 7px 0; }
+  .note-icon { font-weight: 700; width: 14px; flex-shrink: 0; }
+  .note-good .note-icon { color: var(--good); }
+  .note-warn .note-icon { color: var(--warn); }
+  .note-goal .note-icon { color: var(--goal); }
+
+  .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+  .chart-box { background: rgba(23,20,15,0.92); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; backdrop-filter: blur(4px); }
+  .chart-box h4 { margin: 0 0 12px; font-size: 12.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-faint); font-weight: 600; }
+  .chart-wrap { position: relative; height: 220px; }
+  .legend { display: flex; gap: 16px; margin-top: 10px; font-size: 11.5px; color: var(--text-dim); }
+  .legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+
+  .weapon-note { font-size: 13px; color: var(--text-dim); padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .weapon-note:last-child { border-bottom: none; }
+  .weapon-note strong { color: var(--text); }
+
+  .pair-grid { display: grid; gap: 12px; }
+  .pair-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+  .pair-players { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+  .pair-card p { margin: 0; font-size: 13.5px; color: var(--text-dim); }
+  .provisional-note { font-size: 12.5px; color: var(--text-faint); font-style: italic; margin-bottom: 14px; }
+
+  .form-overview { display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px; }
+  .form-record { font-size: 40px; font-weight: 700; }
+  .form-record-label { font-size: 13px; color: var(--text-dim); font-family: 'Inter', sans-serif; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .form-sub { font-size: 11.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-faint); font-weight: 600; margin: 0 0 8px; font-family: 'Inter', sans-serif; }
+  .result-badge { display: inline-block; width: 20px; text-align: center; border-radius: 5px; font-size: 11px; font-weight: 700; padding: 1px 0; }
+  .result-badge.win { background: rgba(74,222,128,0.15); color: var(--good); }
+  .result-badge.loss { background: rgba(248,113,113,0.15); color: var(--warn); }
+
+  .map-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .tab-btn { font-family: 'Inter', sans-serif; font-size: 12.5px; color: var(--text-dim); background: var(--surface); border: 1px solid var(--border); padding: 6px 14px; border-radius: 20px; cursor: pointer; transition: all 0.15s ease; }
+  .tab-btn:hover { color: var(--text); border-color: var(--accent); }
+  .tab-btn.active { color: #17140f; background: linear-gradient(120deg, var(--accent), var(--accent-2)); border-color: transparent; font-weight: 600; }
+  .map-card { display: none; }
+  .map-card.active { display: block; }
+  .map-card h3 { margin: 0 0 12px; font-size: 16px; font-family: 'Inter', sans-serif; text-transform: none; letter-spacing: normal; }
+  .map-note { font-size: 12.5px; color: var(--text-faint); font-style: italic; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+
+  .pool-line { font-size: 13.5px; color: var(--text-dim); margin-bottom: 20px; }
+  .pool-line strong { color: var(--text); }
+
+  footer { text-align: center; padding: 30px 0 10px; color: var(--text-faint); font-size: 12px; border-top: 1px solid var(--border); margin-top: 40px; }
+  .loading { text-align: center; padding: 60px 20px; color: var(--text-faint); font-size: 14px; }
+
+  @media (max-width: 640px) {
+    .side-grid { grid-template-columns: 1fr; gap: 10px; }
+    .chart-grid { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero { flex-direction: column-reverse; text-align: center; }
+    .squad-banner { width: 90px; height: 90px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand"><img src="assets/wordmark.png" alt="MOD Insights"><span>MOD Insights</span></div>
+  <div class="nav-links">
+    <a href="#summary">Summary</a>
+    <a href="#players">Players</a>
+    <a href="#weapons">Weapons</a>
+    <a href="#form">Form</a>
+    <a href="#pairs">Pairs</a>
+    <a href="#maps">Maps</a>
+  </div>
+</nav>
+
+<div class="wrap" id="app">
+  <div class="loading">Loading report&hellip;</div>
+</div>
+
+<script>
+const TIER_LABEL = { high: "High", med: "Medium", low: "Low" };
+const TIER_CLASS = { high: "high", med: "med", low: "low" };
+
+function tierBadge(tier) {
+  return `<span class="badge badge-${TIER_CLASS[tier]}">${TIER_LABEL[tier]}</span>`;
+}
+
+function playerRow(p) {
+  return `<tr><td class="name-cell"><div class="name-wrap"><img class="avatar-mini" src="${p.avatar}" alt="">${p.name}</div></td><td>${p.role}</td><td>${p.games}</td><td>${tierBadge(p.tier)}</td><td>${p.ct_role}</td><td>${p.t_role}</td></tr>`;
+}
+
+function playerCard(p) {
+  const noteCls = p.note_type === "warn" ? "note-warn" : "note-goal";
+  const noteIcon = p.note_type === "warn" ? "!" : "&#8594;";
+  return `<div class="card player-card">
+    <div class="player-card-head">
+      <img class="avatar" src="${p.avatar}" alt="${p.name}">
+      <div class="player-head-text">
+        <h3>${p.name}</h3>
+        <div class="tags"><span class="role-pill">${p.role}</span>${tierBadge(p.tier)}<span class="games-label">${p.games} games</span></div>
+      </div>
+    </div>
+    <div class="side-grid">
+      <div><span class="side-label ct">CT</span><p>${p.ct_detail}</p></div>
+      <div><span class="side-label t">T</span><p>${p.t_detail}</p></div>
+    </div>
+    <div class="note-line note-good"><span class="note-icon">+</span>${p.good}</div>
+    <div class="note-line ${noteCls}"><span class="note-icon">${noteIcon}</span>${p.note}</div>
+  </div>`;
+}
+
+function weaponRow(p) {
+  return `<tr><td class="name-cell">${p.name}</td><td>${p.best_t_weapon}</td><td class="num">${p.best_t_hs}</td><td>${p.best_ct_weapon}</td><td class="num">${p.best_ct_hs}</td></tr>`;
+}
+
+function weaponNote(p) {
+  return `<div class="weapon-note"><strong>${p.name}</strong> &mdash; ${p.weapon_note}</div>`;
+}
+
+function pairCard(pair) {
+  return `<div class="card pair-card">
+    <div class="pair-title">${pair.title}</div>
+    <div class="pair-players">${pair.players}</div>
+    <p>${pair.reasoning}</p>
+  </div>`;
+}
+
+function mapCard(m, idx) {
+  const ctItems = m.ct.map(x => `<li>${x}</li>`).join("");
+  const tItems = m.t.map(x => `<li>${x}</li>`).join("");
+  const noteHtml = m.note ? `<div class="map-note">${m.note}</div>` : "";
+  const slug = m.name.toLowerCase().replace(/ /g, "-");
+  const active = idx === 0 ? " active" : "";
+  return `<div class="card map-card${active}" data-map="${slug}">
+    <h3>${m.name}</h3>
+    <div class="side-grid">
+      <div><span class="side-label ct">CT side</span><ul>${ctItems}</ul></div>
+      <div><span class="side-label t">T side</span><ul>${tItems}</ul></div>
+    </div>
+    ${noteHtml}
+  </div>`;
+}
+
+function matchRow(m) {
+  const cls = m.result === "W" ? "win" : "loss";
+  return `<tr><td>${m.date}</td><td>${m.map}</td><td class="num">${m.us} : ${m.them}</td><td><span class="result-badge ${cls}">${m.result}</span></td></tr>`;
+}
+
+function mapFormRow(name, stats) {
+  return `<tr><td class="name-cell">${name}</td><td class="num">${stats.w}-${stats.l}</td><td class="num">${stats.win_rate}%</td><td>${stats.games}</td></tr>`;
+}
+
+function render(data) {
+  const { report_meta, players, chart_data, best_pairs, maps, recent_form } = data;
+
+  const mapNav = maps.map((m, i) => {
+    const slug = m.name.toLowerCase().replace(/ /g, "-");
+    return `<button type="button" class="tab-btn${i === 0 ? " active" : ""}" data-target="${slug}">${m.name}</button>`;
+  }).join("");
+
+  const mapFormRows = Object.entries(recent_form.by_map)
+    .sort((a, b) => b[1].win_rate - a[1].win_rate)
+    .map(([name, stats]) => mapFormRow(name, stats))
+    .join("");
+
+  document.getElementById("app").innerHTML = `
+    <div class="hero">
+      <div class="hero-text">
+        <div class="kicker">Weekly squad report &middot; ${report_meta.version}</div>
+        <h1>MOD Insights</h1>
+        <div class="meta">${report_meta.date} &nbsp;&middot;&nbsp; Compiled from Leetify &amp; HLTV match data</div>
+      </div>
+      <img class="squad-banner" src="assets/logo.jpg" alt="Ministry of Darkness">
+    </div>
+
+    <div class="focus-banner">
+      <div class="tag">This week's focus</div>
+      <p>${report_meta.weekly_focus}</p>
+    </div>
+
+    <section id="summary">
+      <div class="section-label"><span class="section-num">01</span><h2>Quick summary</h2></div>
+      <table>
+        <tr><th>Player</th><th>Role</th><th>Games</th><th>Confidence</th><th>CT</th><th>T</th></tr>
+        ${players.map(playerRow).join("")}
+      </table>
+      <div class="chart-grid">
+        <div class="chart-box">
+          <h4>HLTV rating</h4>
+          <div class="chart-wrap"><canvas id="ratingChart" role="img" aria-label="Bar chart of HLTV rating by player"></canvas></div>
+        </div>
+        <div class="chart-box">
+          <h4>Entry success, CT vs T</h4>
+          <div class="chart-wrap"><canvas id="entryChart" role="img" aria-label="Grouped bar chart of CT versus T entry success"></canvas></div>
+          <div class="legend"><span><span class="dot" style="background:#5b9fee"></span>CT</span><span><span class="dot" style="background:#e0a458"></span>T</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="players">
+      <div class="section-label"><span class="section-num">02</span><h2>Player detail</h2></div>
+      ${players.map(playerCard).join("")}
+    </section>
+
+    <section id="weapons">
+      <div class="section-label"><span class="section-num">03</span><h2>Weapons</h2></div>
+      <table>
+        <tr><th>Player</th><th>Best T weapon</th><th>HS%</th><th>Best CT weapon</th><th>HS%</th></tr>
+        ${players.map(weaponRow).join("")}
+      </table>
+      ${players.map(weaponNote).join("")}
+    </section>
+
+    <section id="form">
+      <div class="section-label"><span class="section-num">04</span><h2>Recent form</h2></div>
+      <div class="provisional-note">${recent_form.mode} matchmaking results. ${recent_form.note}</div>
+      <div class="form-overview">
+        <div class="form-record">${recent_form.overall.wins}-${recent_form.overall.losses}</div>
+        <div class="form-record-label">Last ${recent_form.matches.length} games &middot; ${recent_form.overall.win_rate}% win rate</div>
+      </div>
+      <div class="form-grid">
+        <div>
+          <h4 class="form-sub">By map</h4>
+          <table>
+            <tr><th>Map</th><th>Record</th><th>Win rate</th><th>Games</th></tr>
+            ${mapFormRows}
+          </table>
+        </div>
+        <div>
+          <h4 class="form-sub">Match log</h4>
+          <table>
+            <tr><th>Date</th><th>Map</th><th>Score</th><th></th></tr>
+            ${recent_form.matches.map(matchRow).join("")}
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="pairs">
+      <div class="section-label"><span class="section-num">05</span><h2>Best pairs</h2></div>
+      <div class="provisional-note">Based on Leetify's "Played With" data &mdash; actual duo win rates. Sy-involving pairs are still small sample (7&ndash;9 games), treat as an early signal.</div>
+      <div class="pair-grid">${best_pairs.map(pairCard).join("")}</div>
+    </section>
+
+    <section id="maps">
+      <div class="section-label"><span class="section-num">06</span><h2>Map positioning</h2></div>
+      <div class="pool-line">Squad pool: <strong>Dust II, Inferno, Cache, Mirage, Nuke, Anubis, Ancient</strong></div>
+      <div class="map-tabs">${mapNav}</div>
+      ${maps.map((m, i) => mapCard(m, i)).join("")}
+    </section>
+
+    <footer>MOD Insights &middot; updated weekly &middot; renders live from report_data.json</footer>
+  `;
+
+  // Wire up map tabs
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const target = btn.getAttribute("data-target");
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".map-card").forEach(c => c.classList.remove("active"));
+      btn.classList.add("active");
+      document.querySelector(`.map-card[data-map="${target}"]`).classList.add("active");
+      return false;
+    });
+  });
+
+  // Build charts
+  const labels = players.map(p => p.name);
+  const ink = "#f2ede2";
+  const dim = "#b3a894";
+  const grid = "#332a1d";
+
+  new Chart(document.getElementById("ratingChart"), {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [{ data: labels.map(n => chart_data.hltv_rating[n]), backgroundColor: "#e8752a", borderRadius: 6, maxBarThickness: 34 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: "#1e1a13", borderColor: "#332a1d", borderWidth: 1, titleColor: ink, bodyColor: ink } },
+      scales: {
+        y: { beginAtZero: true, max: 1.5, grid: { color: grid }, ticks: { color: dim, font: { size: 11 } } },
+        x: { grid: { display: false }, ticks: { color: dim, font: { size: 10.5 } } }
+      }
+    }
+  });
+
+  new Chart(document.getElementById("entryChart"), {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [
+        { label: "CT", data: labels.map(n => chart_data.ct_entry_success[n]), backgroundColor: "#5b9fee", borderRadius: 6, maxBarThickness: 16 },
+        { label: "T", data: labels.map(n => chart_data.t_entry_success[n]), backgroundColor: "#e0a458", borderRadius: 6, maxBarThickness: 16 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: "#1e1a13", borderColor: "#332a1d", borderWidth: 1, titleColor: ink, bodyColor: ink } },
+      scales: {
+        y: { beginAtZero: true, max: 70, grid: { color: grid }, ticks: { color: dim, font: { size: 11 }, callback: (v) => v + "%" } },
+        x: { grid: { display: false }, ticks: { color: dim, font: { size: 10.5 } } }
+      }
+    }
+  });
+}
+
+fetch("report_data.json")
+  .then(res => {
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  })
+  .then(render)
+  .catch(err => {
+    document.getElementById("app").innerHTML = `<div class="loading">Couldn't load report_data.json &mdash; ${err.message}.<br>Make sure it's sitting in the same folder as this file.</div>`;
+  });
+</script>
+
+</body>
+</html>
