@@ -24,7 +24,7 @@
   },
   "players": [
     {
-      "name": "the boy who lift",
+      "name": "dP^",
       "role": "Fragger",
       "games": 235,
       "tier": "high",
@@ -121,21 +121,21 @@
   ],
   "chart_data": {
     "hltv_rating": {
-      "the boy who lift": 1.25,
+      "dP^": 1.25,
       "rosso": 1.07,
       "Sy": 1.34,
       "Sandz": 0.91,
       "Treb": 1.14
     },
     "ct_entry_success": {
-      "the boy who lift": 58,
+      "dP^": 58,
       "rosso": 47,
       "Sy": 62,
       "Sandz": 51,
       "Treb": 56
     },
     "t_entry_success": {
-      "the boy who lift": 50,
+      "dP^": 50,
       "rosso": 51,
       "Sy": 56,
       "Sandz": 45,
@@ -155,7 +155,7 @@
     },
     {
       "title": "Entry duo",
-      "players": "rosso + the boy who lift",
+      "players": "rosso + dP^",
       "reasoning": "28 games together, 50% win rate - confirms what the individual stats already suggested. Best fragger paired with the most reliable trader, and the data backs it up as the T-side engine."
     }
   ],
@@ -163,14 +163,14 @@
     {
       "name": "Dust II",
       "ct": [
-        "the boy who lift - Long doors/pit, aggressive peek on long",
+        "dP^ - Long doors/pit, aggressive peek on long",
         "Treb - B site anchor, holds default with util",
         "Sandz - A site with Sy, holding CT spawn/short",
         "Sy - A site/short, flexible, rotates late for the 1v1",
         "rosso - Mid, calling rotations off info"
       ],
       "t": [
-        "the boy who lift - Leads mid or long control",
+        "dP^ - Leads mid or long control",
         "rosso - Trades directly behind, calls site off what opens",
         "Sandz - Smokes cross on mid, or tunnels smoke on B execute",
         "Sy - Second entry or lurk long/A ramp",
@@ -181,14 +181,14 @@
     {
       "name": "Inferno",
       "ct": [
-        "the boy who lift - Banana, contests T's default banana control",
+        "dP^ - Banana, contests T's default banana control",
         "Treb - A site anchor (default/pit)",
         "Sandz - B site/apartments, molly/smoke apps entrance",
         "Sy - B site with him, or banana support",
         "rosso - Mid/CT spawn, calls off banana or apps pressure"
       ],
       "t": [
-        "the boy who lift - Leads banana or apps push",
+        "dP^ - Leads banana or apps push",
         "rosso - Trades in, calls A or B off first contact",
         "Sandz - Smokes CT on banana, or flashes apps entrance",
         "Sy - Second entry through whichever site opens, or lurk library",
@@ -199,14 +199,14 @@
     {
       "name": "Cache",
       "ct": [
-        "the boy who lift - Contests mid early, aggressive",
+        "dP^ - Contests mid early, aggressive",
         "Treb - A site anchor (default hold)",
         "Sandz - B site with util - smoke quad, molly window",
         "Sy - B site, flex for late retake",
         "rosso - Mid/connector, calls rotations"
       ],
       "t": [
-        "the boy who lift - Leads mid or A main push",
+        "dP^ - Leads mid or A main push",
         "rosso - Trades in, calls A or B off contact",
         "Sandz - Smokes CT on A, or quad smoke into B",
         "Sy - Second entry or lurk vents",
@@ -217,14 +217,14 @@
     {
       "name": "Mirage",
       "ct": [
-        "the boy who lift - Jungle/window, contests mid control",
+        "dP^ - Jungle/window, contests mid control",
         "Treb - A site anchor (default/triple), his best side",
         "Sandz - B site with Sy, window smoke/van",
         "Sy - B site/apps, late clutch potential",
         "rosso - CT spawn/connector, reads mid battle"
       ],
       "t": [
-        "the boy who lift - Mid control or A ramp entry",
+        "dP^ - Mid control or A ramp entry",
         "rosso - Trades him in, calls A or B off mid",
         "Sandz - Smokes CT on A, or window smoke into B",
         "Sy - Flex, second on A execute or holding mid for a pick",
@@ -235,14 +235,14 @@
     {
       "name": "Nuke",
       "ct": [
-        "the boy who lift - Outside/hut, contests early T aggression toward secret or ramp",
+        "dP^ - Outside/hut, contests early T aggression toward secret or ramp",
         "Treb - A site anchor (main default hold), or heaven if comfortable vertically",
         "Sandz - B site (garage/yard) with util - smoke hut, molly link",
         "Sy - B site, flexible for the late retake",
         "rosso - Calls rotations from vents/rafters info, links A and B"
       ],
       "t": [
-        "the boy who lift - Leads outside/ramp control or hut push",
+        "dP^ - Leads outside/ramp control or hut push",
         "rosso - Trades in, calls A (ramp/hut) or B (garage) off contact",
         "Sandz - Smokes heaven/hut, sets up the site take",
         "Sy - Second entry or lurk secret",
@@ -253,14 +253,14 @@
     {
       "name": "Anubis",
       "ct": [
-        "the boy who lift - Contests mid/palace early, aggressive",
+        "dP^ - Contests mid/palace early, aggressive",
         "Treb - A site anchor (site default hold)",
         "Sandz - B site with util - smoke connector, molly water",
         "Sy - B site, flex for late clutch",
         "rosso - Mid/connector, calls rotations"
       ],
       "t": [
-        "the boy who lift - Leads mid or palace control",
+        "dP^ - Leads mid or palace control",
         "rosso - Trades in, calls A or B off what mid/palace gives",
         "Sandz - Smokes CT on A, or connector smoke into B",
         "Sy - Second entry or lurk canal",
@@ -271,14 +271,14 @@
     {
       "name": "Ancient",
       "ct": [
-        "the boy who lift - Contests mid/donut early, aggressive",
+        "dP^ - Contests mid/donut early, aggressive",
         "Treb - A site anchor (default hold)",
         "Sandz - B site with util - smoke cave, molly main",
         "Sy - B site, flex for late retake",
         "rosso - Mid, calls rotations off donut control"
       ],
       "t": [
-        "the boy who lift - Leads mid or main push",
+        "dP^ - Leads mid or main push",
         "rosso - Trades in, calls A or B off contact",
         "Sandz - Smokes CT on A, or cave smoke into B",
         "Sy - Second entry or lurk red/blue",
@@ -290,14 +290,14 @@
   "overpass": {
     "name": "Overpass (official Active Duty 7th map, not in squad's chosen pool)",
     "ct": [
-      "the boy who lift - Contests bathroom/monster early, aggressive",
+      "dP^ - Contests bathroom/monster early, aggressive",
       "Treb - B site anchor (default hold, playground)",
       "Sandz - A site with util - smoke long/bar, molly connector",
       "Sy - A site, flex for late retake",
       "rosso - Calls from short/connector, links A and B"
     ],
     "t": [
-      "the boy who lift - Leads bathroom or long control",
+      "dP^ - Leads bathroom or long control",
       "rosso - Trades in, calls A or B off contact",
       "Sandz - Smokes CT on A, or bathroom smoke into B",
       "Sy - Second entry or lurk bank",
