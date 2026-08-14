@@ -1,9 +1,9 @@
 {
   "report_meta": {
-    "version": "v7",
-    "date": "10 Aug 2026",
-    "changelog": "Added Recent Form section - actual Premier match results (5-4, 56% WR). Dust II and Inferno are perfect so far, Ancient/Anubis/Cache are 0% (1 game each).",
-    "weekly_focus": "Dust II is 3-0 in Premier and Ancient/Anubis/Cache are 0-1 each - worth weighting veto strategy toward Dust II/Inferno until the weaker maps get more reps."
+    "version": "v8",
+    "date": "14 Aug 2026",
+    "changelog": "Updated all player stats from latest CS2 profiles. dP^ confirmed as 'the boy who lift' (239 games). Sy promoted to Medium tier (12 games now). Treb/SandZ game counts updated.",
+    "weekly_focus": "Sy's tier upgrade reflects growing sample size - still watch for consistency over next 15+ games. dP^ remains the anchor with 1.25 HLTV on large sample."
   },
   "tiers": {
     "high": {
@@ -26,7 +26,7 @@
     {
       "name": "dP^",
       "role": "Fragger",
-      "games": 235,
+      "games": 239,
       "tier": "high",
       "ct_role": "Aggressive entry (mid/long doors)",
       "t_role": "Leads execute",
@@ -64,7 +64,7 @@
     {
       "name": "Sandz",
       "role": "Support",
-      "games": 55,
+      "games": 59,
       "tier": "med",
       "ct_role": "Site anchor with util",
       "t_role": "Smokes/flashes the entry",
@@ -83,15 +83,15 @@
     {
       "name": "Sy",
       "role": "Lurker",
-      "games": 9,
-      "tier": "low",
+      "games": 12,
+      "tier": "med",
       "ct_role": "Flex, late-round closer",
       "t_role": "Second entry/lurk",
       "ct_detail": "Flexible position, held for the late-round 1v1/1v2.",
       "t_detail": "Second entry or lurk, depending on the call.",
       "good": "Best clutch numbers on the team (80% 1v1, 36% 1v3)",
-      "note": "Nowhere near enough games yet - revisit once past 30-40 games",
-      "note_type": "warn",
+      "note": "12 games now - solid sample emerging. Clutch instinct is real (33% 1v1), but keep monitoring consistency through 30+ game mark",
+      "note_type": "goal",
       "best_t_weapon": "AK47",
       "best_t_hs": "68%",
       "best_ct_weapon": "M4A4",
@@ -102,7 +102,7 @@
     {
       "name": "Treb",
       "role": "Anchor",
-      "games": 50,
+      "games": 54,
       "tier": "med",
       "ct_role": "Solo site hold",
       "t_role": "Lurk/late support",
@@ -123,9 +123,9 @@
     "hltv_rating": {
       "dP^": 1.25,
       "rosso": 1.07,
-      "Sy": 1.34,
-      "Sandz": 0.91,
-      "Treb": 1.14
+      "Sy": 1.36,
+      "Sandz": 0.92,
+      "Treb": 1.13
     },
     "ct_entry_success": {
       "dP^": 58,
