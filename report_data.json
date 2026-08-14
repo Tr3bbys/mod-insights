@@ -1,6 +1,6 @@
 {
   "report_meta": {
-    "version": "v9",
+    "version": "v10",
     "date": "14 Aug 2026",
     "changelog": "Manual screenshot update via OCR parser",
     "weekly_focus": "Sy's tier upgrade reflects growing sample size - still watch for consistency over next 15+ games. dP^ remains the anchor with 1.25 HLTV on large sample."
@@ -116,7 +116,296 @@
       "best_ct_weapon": "M4A1-S",
       "best_ct_hs": "37%",
       "weapon_note": "Big gap between rifles (58% vs 37% HS) - AK is clearly the stronger weapon, worth noting given the T-side positioning gap is separate from this and about entries, not aim.",
-      "avatar": "assets/treb.jpg"
+      "avatar": "assets/treb.jpg",
+      "kd": 0.99,
+      "weapon_stats": [
+        {
+          "weapon": "CIS AKAT",
+          "kills": 284,
+          "hs": 166,
+          "accuracy": 16
+        },
+        {
+          "weapon": null,
+          "kills": 167,
+          "hs": 62,
+          "accuracy": 20
+        },
+        {
+          "weapon": null,
+          "kills": 63,
+          "hs": 26,
+          "accuracy": 20
+        },
+        {
+          "weapon": "r GLOCK",
+          "kills": null,
+          "hs": 36,
+          "accuracy": 23
+        },
+        {
+          "weapon": "r P2000",
+          "kills": null,
+          "hs": 27,
+          "accuracy": 25
+        },
+        {
+          "weapon": "or \u2014SsFAMAS",
+          "kills": 41,
+          "hs": 20,
+          "accuracy": 24
+        },
+        {
+          "weapon": "r P250",
+          "kills": 30,
+          "hs": 16,
+          "accuracy": 22
+        },
+        {
+          "weapon": "M4A1S -",
+          "kills": 17,
+          "accuracy": 18
+        },
+        {
+          "weapon": "oT",
+          "kills": 12,
+          "accuracy": 19
+        },
+        {
+          "weapon": "\u00e9 ore",
+          "kills": 10,
+          "accuracy": 45
+        },
+        {
+          "weapon": "be iat MAC10",
+          "kills": null,
+          "accuracy": 17
+        },
+        {
+          "weapon": "Tt MP7",
+          "kills": null,
+          "accuracy": 4
+        },
+        {
+          "weapon": "rr TEC9",
+          "kills": null,
+          "accuracy": 17
+        },
+        {
+          "weapon": "\u00a9 moLoToyv",
+          "kills": null,
+          "accuracy": 0
+        },
+        {
+          "weapon": "aa wee GALIL",
+          "kills": null,
+          "accuracy": 17
+        },
+        {
+          "weapon": "ae a \u00a5 MP9",
+          "kills": null,
+          "accuracy": 9
+        },
+        {
+          "weapon": "rr DEAGLE",
+          "kills": null,
+          "accuracy": 4
+        },
+        {
+          "weapon": "r\u2014 usP",
+          "kills": null,
+          "accuracy": 21
+        }
+      ],
+      "teammates": [
+        {
+          "name": "sy SandZ",
+          "games_together": 54,
+          "kd": 0.79,
+          "win_rate": 50,
+          "hs_percent": 37,
+          "rating": 0.9
+        },
+        {
+          "name": "a ima o the boy who lift",
+          "games_together": 47,
+          "win_rate": 49,
+          "adr": 107
+        },
+        {
+          "name": "ee Were 2S rosso",
+          "games_together": 29,
+          "kd": 1.19,
+          "win_rate": 48,
+          "adr": 74,
+          "hs_percent": 48,
+          "rating": 1.26
+        },
+        {
+          "name": "F4 nooooobb",
+          "games_together": 24,
+          "kd": 0.62,
+          "win_rate": 42,
+          "adr": 63,
+          "hs_percent": 53,
+          "rating": 0.75
+        },
+        {
+          "name": "C9) bs Sd 6 syo",
+          "games_together": 12,
+          "kd": 1.43,
+          "win_rate": 58,
+          "adr": 67,
+          "hs_percent": 55,
+          "rating": 1.36
+        },
+        {
+          "name": "2 btcstealth",
+          "games_together": 7,
+          "kd": 1.36,
+          "win_rate": 57,
+          "adr": 7,
+          "hs_percent": 55
+        },
+        {
+          "name": "FA sim",
+          "games_together": 6,
+          "kd": 1.01,
+          "win_rate": 50,
+          "adr": 73,
+          "hs_percent": 41,
+          "rating": 1.51
+        },
+        {
+          "name": "TP WbA KYBAJIDA",
+          "games_together": 2,
+          "win_rate": 100,
+          "adr": 61,
+          "hs_percent": 5,
+          "rating": 0.86
+        },
+        {
+          "name": "@ Merkun",
+          "games_together": 2,
+          "kd": 0.9,
+          "win_rate": 100,
+          "adr": 65,
+          "hs_percent": 30,
+          "rating": 0.98
+        },
+        {
+          "name": "# Jojo [163]",
+          "games_together": 1,
+          "kd": 0.56,
+          "win_rate": 0,
+          "adr": 65,
+          "hs_percent": 50,
+          "rating": 0.7
+        },
+        {
+          "name": "(@} cucumber",
+          "games_together": 1,
+          "kd": 0.89,
+          "win_rate": 0,
+          "adr": 59,
+          "hs_percent": 35,
+          "rating": 1.03
+        },
+        {
+          "name": "?",
+          "games_together": 1,
+          "kd": 0.59,
+          "win_rate": 0,
+          "adr": 48,
+          "hs_percent": 20
+        },
+        {
+          "name": "FA PAPA_PENS",
+          "games_together": 1,
+          "kd": 1.11,
+          "win_rate": 0,
+          "adr": 59,
+          "hs_percent": 45,
+          "rating": 1.26
+        },
+        {
+          "name": "@ Dorsell777",
+          "games_together": 1,
+          "kd": 1.19,
+          "win_rate": 0,
+          "adr": 84,
+          "hs_percent": 5,
+          "rating": 1.17
+        },
+        {
+          "name": "& DeejVv",
+          "games_together": 1,
+          "kd": 0.76,
+          "win_rate": 0,
+          "adr": 77,
+          "hs_percent": 31,
+          "rating": 1.02
+        },
+        {
+          "name": "@ HunteR",
+          "games_together": 1,
+          "kd": 0.72,
+          "win_rate": 0,
+          "adr": 61,
+          "hs_percent": 31
+        },
+        {
+          "name": "AY) kocakatkef",
+          "games_together": 1,
+          "kd": 0.81,
+          "win_rate": 0,
+          "adr": 74,
+          "hs_percent": 46,
+          "rating": 1.03
+        },
+        {
+          "name": "(F giicciik",
+          "games_together": 1,
+          "kd": 0.58,
+          "win_rate": 0,
+          "adr": 66,
+          "hs_percent": 36
+        },
+        {
+          "name": "=> Devon Larrat",
+          "games_together": 1,
+          "win_rate": 0,
+          "adr": 77,
+          "hs_percent": 45,
+          "rating": 1.14
+        },
+        {
+          "name": "\u2122\u00ae Dexyu",
+          "games_together": 1,
+          "kd": 1.67,
+          "win_rate": 100,
+          "adr": 116,
+          "hs_percent": 54
+        },
+        {
+          "name": "\". N1KOV",
+          "games_together": 1,
+          "kd": 1.29,
+          "win_rate": 100,
+          "adr": 59,
+          "hs_percent": 27,
+          "rating": 1.23
+        },
+        {
+          "name": "_*_ Swein",
+          "games_together": 1,
+          "kd": 1.19,
+          "win_rate": 100,
+          "adr": 90,
+          "hs_percent": 44,
+          "rating": 1.34
+        }
+      ]
     }
   ],
   "chart_data": {
