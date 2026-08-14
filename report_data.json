@@ -1,8 +1,8 @@
 {
   "report_meta": {
-    "version": "v10",
+    "version": "v8",
     "date": "14 Aug 2026",
-    "changelog": "Manual screenshot update via OCR parser",
+    "changelog": "Updated all player stats from latest CS2 profiles. dP^ confirmed as 'the boy who lift' (239 games). Sy promoted to Medium tier (12 games now). Treb/SandZ game counts updated.",
     "weekly_focus": "Sy's tier upgrade reflects growing sample size - still watch for consistency over next 15+ games. dP^ remains the anchor with 1.25 HLTV on large sample."
   },
   "tiers": {
@@ -102,8 +102,8 @@
     {
       "name": "Treb",
       "role": "Anchor",
-      "games": 1324,
-      "tier": "high",
+      "games": 54,
+      "tier": "med",
       "ct_role": "Solo site hold",
       "t_role": "Lurk/late support",
       "ct_detail": "Solo holds a site with util backing.",
