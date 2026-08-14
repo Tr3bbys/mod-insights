@@ -1,12 +1,13 @@
-name: Update CS2 Stats
+name: Manual Stats Update
 
 on:
-  schedule:
-    # Run every Sunday at 10:00 UTC
-    - cron: '0 10 * * 0'
-  
-  # Allow manual trigger
+  # Manual trigger only
   workflow_dispatch:
+    inputs:
+      screenshots:
+        description: 'Screenshot files to process'
+        required: false
+        default: 'treb.png dp.png sandz.png sy.png rosso.png'
 
 jobs:
   update-stats:
@@ -24,14 +25,22 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests beautifulsoup4
+          pip install pytesseract pillow opencv-python
+          # For Ubuntu: install tesseract-ocr
+          sudo apt-get update && sudo apt-get install -y tesseract-ocr
       
-      - name: Run stats update
-        run: python update_stats.py
+      - name: Note about screenshots
+        run: |
+          echo "To use this workflow:"
+          echo "1. Place your screenshot files in the repo"
+          echo "2. Run: python update_stats_screenshot.py <screenshots>"
+          echo "3. This workflow can be triggered manually from GitHub Actions tab"
+          echo ""
+          echo "Local usage: python update_stats_screenshot.py treb.png dp.png sandz.png sy.png rosso.png"
       
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add report_data.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update: Weekly CS2 stats sync" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update CS2 stats from screenshots" && git push) || echo "No changes to commit"
