@@ -1,6 +1,6 @@
 # CS2 Stats Updater
 
-Automated screenshot-based stats updater for csstats.gg player data.
+Screenshot-based stats updater for csstats.gg player data. Uses OCR to extract stats automatically from screenshots of player profiles.
 
 ## Installation
 
@@ -23,62 +23,147 @@ brew install tesseract
 sudo apt-get install tesseract-ocr
 ```
 
-## Usage
+## Usage (Option B - Multiple Tabs Per Player)
 
-1. Take screenshots of each player's profile on csstats.gg:
-   - Screenshot each player tab (STATS, WEAPONS, PLAYED WITH, MATCHES)
-   - Save with player name in filename (e.g., `treb.png`, `dp.png`)
+### Step 1: Take Screenshots
+For each player, take separate screenshots of these tabs:
+1. **STATS** tab - games played, K/D, HLTV rating, HS%, ADR
+2. **WEAPONS** tab - weapon breakdown with kills, HS%, accuracy, damage
+3. **PLAYED WITH** tab - teammate stats and synergy
 
-2. Run the updater:
-```bash
-python update_stats_screenshot.py treb.png dp.png sandz.png sy.png rosso.png
+Save with pattern: `{playername}_{tab}.png`
+
+Example filenames:
+```
+treb_stats.png        rosso_stats.png       sandz_stats.png       sy_stats.png          dp_stats.png
+treb_weapons.png      rosso_weapons.png     sandz_weapons.png     sy_weapons.png        dp_weapons.png
+treb_played_with.png  rosso_played_with.png sandz_played_with.png sy_played_with.png    dp_played_with.png
 ```
 
-The script will:
+**Note**: MATCHES tab is optional (varies based on 5-stack availability)
+
+### Step 2: Run the Updater
+
+Option A - Explicit files:
+```bash
+python update_stats_screenshot.py treb_stats.png treb_weapons.png treb_played_with.png \
+                                   dp_stats.png dp_weapons.png dp_played_with.png \
+                                   sandz_stats.png sandz_weapons.png sandz_played_with.png \
+                                   sy_stats.png sy_weapons.png sy_played_with.png \
+                                   rosso_stats.png rosso_weapons.png rosso_played_with.png
+```
+
+Option B - Using wildcards (simpler):
+```bash
+python update_stats_screenshot.py treb_*.png dp_*.png sandz_*.png sy_*.png rosso_*.png
+```
+
+### Step 3: Auto-Sync
+The script will automatically:
 - Extract all text from screenshots using OCR
-- Parse stats, weapons, teammates, and matches
+- Parse stats by tab type
 - Update `report_data.json`
-- Auto-increment version
-- Auto-commit and push to GitHub
+- Increment version number
+- Generate changelog entry
+- Commit and push to GitHub
 
-## How It Works
+## What Gets Extracted
 
-1. **Screenshot Preprocessing**: Converts images to grayscale and applies thresholding for better OCR accuracy
-2. **Text Extraction**: Uses Tesseract OCR to extract all text from the screenshot
-3. **Data Parsing**: Regex patterns extract:
-   - Basic stats (games, K/D, HLTV rating, win rate, HS%)
-   - Weapon data (kills, headshot%, accuracy, damage)
-   - Teammate stats (played with data)
-   - Recent matches
-4. **JSON Update**: Updates `report_data.json` with new data
-5. **Git Sync**: Auto-commits and pushes changes to GitHub
+### From STATS Tab
+- Games played
+- K/D ratio
+- HLTV rating
+- Win rate
+- Headshot %
+- ADR (Average Damage per Round)
+- Clutch success rate
+
+### From WEAPONS Tab
+- Each weapon used
+- Kill count per weapon
+- Headshot % per weapon
+- Accuracy
+- Damage dealt
+- Shots fired
+- Body part hit distribution
+
+### From PLAYED WITH Tab
+- Teammate names and stats
+- Games played together
+- Combined K/D with teammate
+- Win rate as a pair
+- ADR together
+- Rating synergy
 
 ## Tips for Best Results
 
-- Take clear, high-resolution screenshots
-- Ensure the stat text is visible and not blurry
-- Include the full player profile stat sections
-- Name files with player name for auto-detection
+1. **Screenshot Quality**
+   - Take high-resolution screenshots
+   - Ensure text is clear and readable
+   - Avoid blurry or zoomed-out images
 
-## Automation
+2. **Full Data Visibility**
+   - Make sure all stat columns are visible
+   - Scroll to see weapon/teammate data if needed
+   - Include table headers for context
 
-GitHub Actions workflow can be triggered manually:
-1. Go to Actions tab on GitHub
-2. Select "Manual Stats Update"
-3. Click "Run workflow"
-4. Enter screenshot filenames
+3. **Consistent Naming**
+   - Use lowercase player names: `treb`, `dp`, `sandz`, `sy`, `rosso`
+   - Include tab type in filename: `stats`, `weapons`, `played_with`
+   - Use underscore separator: `{player}_{tab}.png`
+
+4. **File Organization**
+   - Save all screenshots to the mod-insights project root folder
+   - Delete old screenshots after updating (optional)
 
 ## Troubleshooting
 
-**"pytesseract.TesseractNotFoundError"**
-- Install Tesseract OCR (see Installation section)
-- Windows users: Add to PATH or set in script: `pytesseract.pytesseract.pytesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'`
+### "pytesseract.TesseractNotFoundError"
+Windows users need to either:
+1. Add Tesseract to PATH, or
+2. Edit the script and add this line after imports:
+   ```python
+   pytesseract.pytesseract.pytesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+   ```
 
-**Poor OCR accuracy**
-- Ensure screenshots are high resolution
-- Text should be clearly visible
-- Try adjusting the image preprocessing in `preprocess_image()`
+### Poor OCR Accuracy
+- Ensure screenshots are high resolution (1920x1080 or higher recommended)
+- Text should be clearly visible without distortion
+- Avoid dark mode if site has light mode option
+- Try adjusting `preprocess_image()` parameters if needed
 
-**Stats not parsing correctly**
-- The regex patterns may need adjustment based on csstats.gg layout changes
-- Check OCR output in terminal for what was extracted
+### Stats Not Parsing
+- Check terminal output for what text was extracted
+- Verify screenshot includes the stat you're looking for
+- Ensure column headers are visible
+- The regex patterns may need adjustment if csstats.gg layout changes significantly
+
+### Git Push Fails
+- Ensure git is configured: `git config --global user.name "Your Name"` and `git config --global user.email "your@email.com"`
+- Check repo connectivity
+- Verify you have push access to the repository
+
+## Workflow Example
+
+```bash
+# 1. Navigate to project folder
+cd "c:\Users\trebl\OneDrive\Desktop\Claude Projects\mod-insights"
+
+# 2. Take screenshots and save them with proper names
+# (Use screenshot tool or print-screen)
+
+# 3. Run the updater with wildcard
+python update_stats_screenshot.py treb_*.png dp_*.png sandz_*.png sy_*.png rosso_*.png
+
+# 4. Check output - it will auto-commit and push if successful
+```
+
+## GitHub Actions (Optional)
+
+The workflow can also be triggered manually from GitHub:
+1. Go to your repository on GitHub
+2. Click "Actions" tab
+3. Select "Manual Stats Update" workflow
+4. Click "Run workflow"
+
+(Note: GitHub Actions version requires uploading screenshots to the repo, so local usage is simpler)

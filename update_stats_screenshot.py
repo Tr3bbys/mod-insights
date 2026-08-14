@@ -242,8 +242,13 @@ def main():
     """Main execution"""
     if len(sys.argv) < 2:
         print("Usage: python update_stats_screenshot.py <screenshot1.png> [screenshot2.png] ...")
-        print("\nExample: python update_stats_screenshot.py treb.png dp.png sandz.png sy.png rosso.png")
-        print("\nThe tool will extract stats from each screenshot and update report_data.json")
+        print("\nExample with multiple tabs per player:")
+        print("  python update_stats_screenshot.py treb_stats.png treb_weapons.png treb_played_with.png \\")
+        print("                                     dp_stats.png dp_weapons.png dp_played_with.png ...")
+        print("\nOr with wildcards:")
+        print("  python update_stats_screenshot.py treb_*.png dp_*.png sandz_*.png sy_*.png rosso_*.png")
+        print("\nSupported tab types: stats, weapons, played_with (matches tab optional)")
+        print("\nThe tool will extract all data from screenshots and update report_data.json")
         return
     
     screenshot_files = sys.argv[1:]
@@ -258,30 +263,118 @@ def main():
         report_data = json.load(f)
     
     print("Starting screenshot-based stats update...")
+    print("Screenshots to process:", len(screenshot_files))
     
     success_count = 0
+    player_data = {player: {} for player in PLAYERS}  # Track data per player
+    
     for screenshot_path in screenshot_files:
         # Try to match player name from filename
         filename = Path(screenshot_path).stem.lower()
         
         matched_player = None
+        matched_tab = None
+        
+        # Match player name
         for player in PLAYERS:
-            if player.lower() in filename or filename in player.lower():
+            if player.lower() in filename or filename.startswith(player.lower()):
                 matched_player = player
                 break
+        
+        # Match tab type
+        if 'stats' in filename or 'stat' in filename:
+            matched_tab = 'stats'
+        elif 'weapon' in filename:
+            matched_tab = 'weapons'
+        elif 'played' in filename or 'with' in filename:
+            matched_tab = 'played_with'
+        elif 'match' in filename:
+            matched_tab = 'matches'
         
         if not matched_player:
             print(f"⚠ Could not determine player from filename: {screenshot_path}")
             continue
         
-        success, message = process_player_screenshot(matched_player, screenshot_path, report_data)
-        print(message)
-        if success:
-            success_count += 1
+        print(f"\n→ Processing {matched_player} [{matched_tab or 'unknown'}]...")
+        
+        if not Path(screenshot_path).exists():
+            print(f"  ✗ File not found: {screenshot_path}")
+            continue
+        
+        # Extract text from image
+        text = extract_text_from_screenshot(screenshot_path)
+        if not text:
+            print(f"  ✗ Could not extract text from image")
+            continue
+        
+        # Parse based on tab type
+        if matched_tab == 'stats':
+            stats = parse_stats_tab(text)
+            if stats:
+                player_data[matched_player]['stats'] = stats
+                print(f"  ✓ Stats: {stats.get('games', '?')} games, {stats.get('kd', '?')} K/D, {stats.get('hltv_rating', '?')} rating")
+                success_count += 1
+            else:
+                print(f"  ✗ Could not parse stats")
+        
+        elif matched_tab == 'weapons':
+            weapons = parse_weapons_tab(text)
+            if weapons:
+                player_data[matched_player]['weapons'] = weapons
+                print(f"  ✓ Weapons: {len(weapons)} weapon types extracted")
+                success_count += 1
+            else:
+                print(f"  ✗ Could not parse weapons")
+        
+        elif matched_tab == 'played_with':
+            teammates = parse_played_with_tab(text)
+            if teammates:
+                player_data[matched_player]['teammates'] = teammates
+                print(f"  ✓ Teammates: {len(teammates)} players extracted")
+                success_count += 1
+            else:
+                print(f"  ✗ Could not parse teammates")
     
     if success_count == 0:
-        print("No stats were updated.")
+        print("\n✗ No stats were extracted.")
         return
+    
+    print(f"\n✓ Extracted data from {success_count} screenshots")
+    
+    # Update report_data.json with all collected data
+    print("\nUpdating report_data.json...")
+    
+    with open(report_file, 'r') as f:
+        report_data = json.load(f)
+    
+    for player_name, data in player_data.items():
+        if not data:
+            continue
+        
+        # Find player in report_data
+        for player in report_data.get("players", []):
+            if player["name"] == player_name:
+                # Update stats
+                if 'stats' in data:
+                    stats = data['stats']
+                    if 'games' in stats:
+                        player['games'] = stats['games']
+                    if 'kd' in stats:
+                        # Don't update from OCR as it's less reliable
+                        pass
+                    if 'hltv_rating' in stats:
+                        pass
+                    
+                    # Update tier based on games
+                    if 'games' in stats:
+                        new_tier = get_tier(stats['games'])
+                        if new_tier != player.get("tier"):
+                            player["tier"] = new_tier
+                
+                # Note: Weapons and teammate data could be added to JSON structure
+                # For now, we focus on the main stats
+                
+                break
     
     # Update metadata
     update_report_metadata(report_data)
