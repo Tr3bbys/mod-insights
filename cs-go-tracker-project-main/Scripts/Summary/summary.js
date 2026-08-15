@@ -5,6 +5,9 @@ const WEAPON_IMAGES = {
     "M4A1-S": "cs-go-tracker-project-main/images/weapons/M4A1-S.webp",
 };
 
+const TIER_CLASS = { high: "high-confidence", med: "med-confidence", low: "low-confidence" };
+const TIER_LABEL = { high: "High", med: "Medium", low: "Low" };
+
 let players = [];
 
 let weapon_note = [];
@@ -89,7 +92,7 @@ export function generateSummary () {
                             <p class="summary-text"> Games: <span class="bold-text">${playerDetails.games}</span></p>
                             <p class="summary-text"> Confidence: </p>
 
-                            <button class="high-confidence"> ${playerDetails.tier} </button>
+                            <button class="${TIER_CLASS[playerDetails.tier] || "med-confidence"}"> ${TIER_LABEL[playerDetails.tier] || playerDetails.tier} </button>
                         </div>
                     </div>
 

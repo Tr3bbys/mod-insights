@@ -146,7 +146,7 @@
 }
 
 .high-confidence { background-color: #22C55E; }
-.med-confidence  { background-color: #EAB308; }
+.med-confidence  { background-color: var(--accent); }
 .low-confidence  { background-color: #EF4444; }
 
 /* ==============================
