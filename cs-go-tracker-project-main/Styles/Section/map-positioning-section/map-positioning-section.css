@@ -1,0 +1,155 @@
+/* ==============================
+   COLOURS & VARIABLES
+   ============================== */
+:root {
+    --bg-primary: #0B0F14;
+    --bg-secondary: #151B23;
+    --bg-tertiary: #1C2430;
+    --accent: #F59E0B;
+    --accent-hover: #FFB52E;
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --border: #293342;
+    --box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+    --success: #22C55E;
+    --danger: #EF4444;
+    --info: #3B82F6;
+    --font-handwritten: 'Rock Salt', cursive;
+}
+
+/* ==============================
+   map positioning section and container 
+   ============================== */
+
+.map-positioning{
+    margin-top: 60px;
+    padding: 20px;
+}
+
+.maps-sub-divider{
+    margin-bottom: 40px;
+}
+
+.maps{
+    font-weight: bold;
+}
+
+.class-map{
+    border-radius: 20px;
+    padding: 5px 15px;
+
+    margin-right: 10px;
+
+    background-color: #131820;
+
+    border: 1px solid #131820;
+
+    color: #F1F5F9;
+
+    transition: border 0.51s;
+}
+
+.class-map:hover{
+    border: 1px solid #F59E0B;
+}
+
+.active{
+    background-color: #F59E0B;
+    color: black;
+    border: transparent;
+}
+
+.active:hover{
+    border: transparent;
+}
+
+
+.map-positioning-container{
+    padding: 20px;
+
+    border: 1px solid #F59E0B;
+    box-shadow: var(--box-shadow);
+    border-radius: 20px;
+
+    margin-top: 30px;
+    width: 70%;
+
+    display: none;
+
+}
+
+
+.map{
+    margin-bottom: 30px;
+    font-family: 'Rock salt', cursive;
+    font-size: 20px;
+}
+
+.both-sides-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:20px;
+}
+
+.CT-side, .T-side{
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.CT-title, .T-title{
+    margin-left: 10px;
+
+    font-family: 'Rock salt', cursive;
+
+    direction: ltr;
+    letter-spacing: 2px;
+}
+
+.CT-title{
+    color: #497eb3;
+}
+
+.T-title{
+   color: #c5a641;
+}
+
+.profile-name-2{
+    font-family: 'Rock salt',cursive;
+    font-weight: bold;
+}
+
+.side-tasks{
+    margin-left: 15px;
+
+    line-height: 30px;
+}
+
+
+.active-4{
+    display: block;
+}
+
+.sub-p{
+    margin-top: 25px;
+
+    border-top: solid 1px #293342;
+
+    padding-top: 15px;
+}
+
+@media (max-width: 700px) {
+    .map-positioning-container {
+        width: 100%;
+    }
+
+    .both-sides-container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .class-map {
+        margin-bottom: 8px;
+    }
+}

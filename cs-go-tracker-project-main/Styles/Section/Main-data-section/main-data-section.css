@@ -1,0 +1,226 @@
+/* ==============================
+   COLOURS & VARIABLES
+   ============================== */
+:root {
+  --bg-primary: #0B0F14;
+  --bg-secondary: #151B23;
+  --bg-tertiary: #1C2430;
+  --accent: #F59E0B;
+  --accent-hover: #FFB52E;
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --border: #293342;
+  --box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+  --success: #22C55E;
+  --danger: #EF4444;
+  --info: #3B82F6;
+  --font-handwritten: 'Rock Salt', cursive;
+}
+
+/* ==============================
+   dashboard and card 
+   ============================== */
+
+.data-title {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  align-items: center;
+  margin-left: 20px;
+}
+
+
+.dashboard {
+  background-color: #171b21;
+  border: 1px solid #d97706;
+  /* Subtle orange border */
+  border-radius: 12px;
+  padding: 24px;
+  width: 950px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-header {
+  font-size: 24px;
+  font-weight: bold;
+  color: #f3f4f6;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.charts-wrapper {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+
+  margin-bottom: 50px;
+}
+
+.chart-card {
+  flex: 1;
+  background-color: #1b2028;
+  border: 1px solid #2a313d;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #9ca3af;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ==============================
+ x and y axis
+   ============================== */
+.chart-area {
+  display: flex;
+  height: 220px;
+  margin-bottom: 40px;
+ 
+}
+
+
+.y-axis {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  padding-right: 12px;
+  font-size: 11px;
+  color: #6b7280;
+  text-align: right;
+  width: 35px;
+  user-select: none;
+}
+
+.x-label {
+  position: absolute;
+  bottom: -32px;
+  left: 40%;
+  font-size: 11px;
+  color: #9ca3af;
+  white-space: nowrap;
+  transform: rotate(-25deg);
+  transform-origin: top left;
+}
+
+
+/* ==============================
+chart grid and grouping 
+   ============================== */
+
+.chart-grid {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  border-left: 1px solid #374151;
+  border-bottom: 1px solid #374151;
+  position: relative;
+  padding: 0 10px;
+}
+
+
+.chart-group {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 4px;
+ 
+  height: 100%;
+  position: relative;
+}
+
+
+/* ==============================
+  css animation
+   ============================== */
+
+@keyframes growUp {
+  from {
+    height: 0%;
+  }
+
+  to {
+    height: var(--bar-height);
+  }
+}
+
+
+
+/* ==============================
+  bar styling 
+   ============================== */
+
+.bar {
+  width: 18px;
+  border-radius: 3px 3px 0 0;
+  height: var(--bar-height);
+  animation: growUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+
+.bar-value {
+  position: absolute;
+  top: -18px;
+  font-size: 10px;
+  font-weight: bold;
+  color: #e5e7eb;
+  white-space: nowrap;
+  opacity: 0;
+  animation: fadeIn 0.4s ease 1s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.bar-orange {
+  background-color: #f97316;
+}
+
+.bar-blue {
+  background-color: #3b82f6;
+}
+
+
+/* ==============================
+ legend
+   ============================== */
+.legend {
+  display: flex;
+  gap: 15px;
+  font-size: 12px;
+  color: #9ca3af;
+  margin-top: auto;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+@media (max-width: 700px) {
+  .charts-wrapper {
+    flex-direction: column;
+    padding: 10px;
+  }
+}

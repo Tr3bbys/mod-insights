@@ -1,0 +1,119 @@
+/* ==============================
+   COLOURS & VARIABLES
+   ============================== */
+:root {
+    --bg-primary: #0B0F14;
+    --bg-secondary: #151B23;
+    --bg-tertiary: #1C2430;
+    --accent: #F59E0B;
+    --accent-hover: #FFB52E;
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --border: #293342;
+    --box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+    --success: #22C55E;
+    --danger: #EF4444;
+    --info: #3B82F6;
+    --font-handwritten: 'Rock Salt', cursive;
+}
+
+.Recent-form-section {
+    margin-top: 60px;
+    padding: 20px;
+}
+
+.recent {
+    margin-left: 0px;
+}
+
+.sub-title {
+    margin-bottom: 35px;
+}
+
+.result {
+    font-family: 'Rock salt', cursive;
+    margin-right: 15px;
+    font-size: 30px;
+}
+
+
+/* ==============================
+  grid
+   ============================== */
+
+
+.table-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.table-container {
+    margin-top: 40px;
+}
+
+table {
+    border: solid 1px #F59E0B;
+    border-radius: 20px;
+
+    box-shadow: var(--box-shadow);
+
+    padding: 15px;
+
+    width: 80%;
+}
+
+th {
+    text-align: start;
+}
+
+td {
+    border-bottom: solid 1px #42414086;
+    padding: 10px 0px;
+    vertical-align: middle;
+
+
+}
+
+.grid-sub-title {
+    margin-left: 10px;
+    margin-bottom: 15px;
+
+    font-size: 30px;
+}
+
+
+.win {
+    background-color: #03441b;
+    color: #06f55d;
+
+    padding: 7px;
+    border-radius: 10px;
+    border: 1px solid #444e47;
+}
+
+.lose {
+    background-color: #610808;
+    color: #f44b4b;
+
+    width: 30px;
+
+    padding-top: 3px;
+
+    display: flex;
+    justify-content: center;
+
+    padding: 7px;
+    border-radius: 10px;
+    border: 1px solid #444e47;
+
+}
+
+@media (max-width: 700px) {
+    .table-grid {
+        grid-template-columns: 1fr;
+    }
+
+    table {
+        width: 100%;
+    }
+}

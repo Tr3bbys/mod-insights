@@ -1,0 +1,69 @@
+/* ==============================
+   COLOURS & VARIABLES
+   ============================== */
+:root {
+    --bg-primary: #0B0F14;
+    --bg-secondary: #151B23;
+    --bg-tertiary: #1C2430;
+    --accent: #F59E0B;
+    --accent-hover: #FFB52E;
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --border: #293342;
+    --box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+    --success: #22C55E;
+    --danger: #EF4444;
+    --info: #3B82F6;
+    --font-handwritten: 'Rock Salt', cursive;
+}
+
+/* ==============================
+  best pair section and container 
+   ============================== */
+.best-pairs-section{
+    margin-top: 60px;
+    padding: 20px;
+}
+
+
+
+
+.best-pair-container{
+    padding: 30px;
+
+    border: 1px solid #F59E0B;
+    border-radius: 20px;
+
+    box-shadow: var(--box-shadow);
+
+    background-color: #443111;
+
+    margin-bottom: 20px;
+}
+
+
+.title-divider{
+    margin-bottom: 15px;
+}
+
+.best-title{
+    font-family: 'Rock salt', cursive;
+
+    color: #F59E0B;
+  
+    font-size: 20px;
+}
+
+
+.name-divider{
+    margin-bottom: 15px;
+}
+
+.best-profile-names{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+
+

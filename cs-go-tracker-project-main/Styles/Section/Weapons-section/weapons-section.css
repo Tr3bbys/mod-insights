@@ -1,0 +1,254 @@
+/* ==============================
+   COLOURS & VARIABLES
+   ============================== */
+:root {
+    --bg-primary: #0B0F14;
+    --bg-secondary: #151B23;
+    --bg-tertiary: #1C2430;
+    --accent: #F59E0B;
+    --accent-hover: #FFB52E;
+    --text-primary: #F1F5F9;
+    --text-secondary: #94A3B8;
+    --border: #293342;
+    --box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+    --success: #22C55E;
+    --danger: #EF4444;
+    --info: #3B82F6;
+    --font-handwritten: 'Rock Salt', cursive;
+}
+
+/* ==============================
+   Swiper 
+   ============================== */
+.swiper {
+    width: 100%;
+    max-width: 1450px;
+    margin: 0 auto;
+}
+
+.swiper-slide {
+    border: solid 1px #F59E0B;
+    border-radius: 20px;
+
+    box-shadow: var(--box-shadow);
+}
+
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    display: none !important;
+    content: "" !important;
+}
+
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #eae6e6;
+    background-color: #F59E0B;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background-color: #FFB52E;
+    transform: scale(1.1);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+
+    ::slotted(svg),
+    svg {
+        height: 100%;
+        object-fit: contain;
+        transform-origin: center;
+        width: 100%;
+        fill: currentColor;
+        pointer-events: none;
+        display: none;
+    }
+}
+
+
+
+/* ==============================
+   weapon section top
+   ============================== */
+
+
+.weapon-image-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    
+}
+
+.weapons-profile-image {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+.weapon-profile-name-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.weapon-profile-name {
+    font-family: 'Rock salt', cursive;
+    font-size: 30px;
+}
+
+
+/* ==============================
+   weapon section bottom
+   ============================== */
+
+.weapon-main-bottom-container {
+    display: flex;
+    gap: 120px;
+}
+
+
+
+.weapon-container-1 {
+    padding: 20px;
+
+    margin-top: 60px;
+}
+
+
+.weapon-title {
+    display: flex;
+    justify-content: center;
+}
+
+.weapon-CT,
+.weapon-T {
+    font-family: 'Rock salt', cursive;
+    margin-bottom: 20px;
+
+    direction: ltr;
+    letter-spacing: 2px;
+}
+
+
+.weapon-image {
+    position: relative;
+}
+
+.weapon-name,
+.weapon-name-m4-s {
+    position: absolute;
+    left: 200px;
+    bottom: 10px;
+
+    font-family: 'Rock salt', cursive;
+
+    white-space: nowrap;
+}
+
+.weapon-name-m4-s {
+    left: 180px;
+}
+
+.weapon {
+    width: 250px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.headshot-container {
+    margin-top: 30px;
+}
+
+.headshot-percentage {
+    font-family: 'Rock salt', cursive;
+}
+
+
+
+
+/* ==============================
+   weapon summary
+   ============================== */
+
+
+.weapon-summary-summary-container {
+    border: 2px solid #F59E0B;
+    border-radius: 16px;
+    box-shadow: var(--box-shadow);
+    margin-top: 60px;
+    padding: 20px 30px;
+
+}
+
+.weapon-summary-container {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 181, 46, 0.4); 
+    padding: 20px 10px;
+}
+
+
+.weapon-summary-container:last-child {
+    border-bottom: none;
+}
+
+
+.weapon-summary-text {
+    color: #F1F5F9;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+
+.profile-summary-name {
+    color: #F1F5F9;
+    font-family: 'Rock salt', cursive;
+    font-size: 1.4rem;
+    margin-right: 8px;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 700px) {
+    .weapons-profile-image {
+        width: 160px;
+        height: 160px;
+    }
+
+    .weapon-main-bottom-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .weapon-container-1 {
+        margin-top: 20px;
+    }
+
+    .weapon-name,
+    .weapon-name-m4-s {
+        left: 130px;
+    }
+
+    .weapon {
+        width: 160px;
+        height: 100px;
+    }
+}
+
