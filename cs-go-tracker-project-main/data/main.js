@@ -38,7 +38,7 @@ export function generateStart() {
             <div class="top-section">
                 <div class="top-section-text">
                     <p class="text-sub-head">Weekly squad report - ${main_text.version}</p>
-                    <p class="text-header">CS-GO Insights</p>
+                    <p class="text-header">CS2 Insights</p>
                     <p class="text-sub-head">${main_text.date} - Compiled from Leefity & HLTV match data</p>
                 </div>
 
