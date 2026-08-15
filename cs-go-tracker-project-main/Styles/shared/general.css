@@ -10,6 +10,11 @@
 
 html {
     font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+section {
+    scroll-margin-top: 80px;
 }
 
 body {
@@ -107,6 +112,10 @@ a {
 
 
 .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
     width: 100%;
     height: 64px;
 
