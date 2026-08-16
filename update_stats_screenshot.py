@@ -25,6 +25,12 @@ except ImportError:
 
 PLAYERS = ["dP^", "rosso", "Sandz", "Sy", "Treb"]
 
+# Filenames can't carry the "^" in dP^'s name, so it needs an explicit alias
+# to match screenshot filenames like dp_stats.png.
+PLAYER_ALIASES = {
+    "dP^": ["dp"],
+}
+
 TIER_THRESHOLDS = {
     "high": 100,
     "med": 50,
@@ -277,7 +283,8 @@ def main():
         
         # Match player name
         for player in PLAYERS:
-            if player.lower() in filename or filename.startswith(player.lower()):
+            candidates = [player.lower()] + PLAYER_ALIASES.get(player, [])
+            if any(c in filename or filename.startswith(c) for c in candidates):
                 matched_player = player
                 break
         
