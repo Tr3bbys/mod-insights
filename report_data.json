@@ -2,8 +2,8 @@
   "report_meta": {
     "version": "v11",
     "date": "16 Aug 2026",
-    "changelog": "Manual screenshot update via OCR parser",
-    "weekly_focus": "Sy's tier upgrade reflects growing sample size - still watch for consistency over next 15+ games. dP^ remains the anchor with 1.25 HLTV on large sample."
+    "changelog": "Screenshot stats refresh + commentary rewritten against the new numbers",
+    "weekly_focus": "Full squad refresh from new screenshots. Sy's tier actually reads Low now (still just 15 games) even though his underlying numbers keep climbing - the confidence math hasn't caught up yet. dP^ remains the most proven anchor at 1.27 HLTV over 249 games, and Treb's games count was quietly stale for a while (was showing 54, actually 63)."
   },
   "tiers": {
     "high": {
@@ -32,14 +32,14 @@
       "t_role": "Leads execute",
       "ct_detail": "Aggressive peek on entry lanes to shut down T momentum early rather than sit passive.",
       "t_detail": "First through on every default execute, wins the opening duel more often than not.",
-      "good": "Best entry success on both sides, ADR miles ahead of the squad - big sample so this is trustworthy",
+      "good": "Best entry success and ADR of anyone with a real sample - 54% combined entries, 88 ADR over 249 games, so this is trustworthy.",
       "note": "Team leans hard on him - if he's off, the whole T-side execute structure needs a backup plan",
       "note_type": "warn",
       "best_t_weapon": "AK47",
       "best_t_hs": "63%",
       "best_ct_weapon": "M4A4",
-      "best_ct_hs": "54%",
-      "weapon_note": "Noticeably stronger on M4A4 than M4A1-S (54% vs 44% HS) - worth actually running M4A4 on CT if he isn't already.",
+      "best_ct_hs": "55%",
+      "weapon_note": "Noticeably stronger on M4A4 than M4A1-S (55% vs 44% HS) - worth actually running M4A4 on CT if he isn't already.",
       "avatar": "assets/dan.jpg",
       "weapon_stats": [
         {
@@ -297,12 +297,12 @@
       "note": "Nothing spikes as a standout stat, so the value here is leadership not raw firepower",
       "note_type": "warn",
       "best_t_weapon": "AK47",
-      "best_t_hs": "49%",
+      "best_t_hs": "50%",
       "best_ct_weapon": "M4A4",
       "best_ct_hs": "49%",
       "weapon_note": "Dead even on both rifles - consistency shows up in loadout choice too, not just role.",
       "avatar": "assets/rosso.jpg",
-      "kd": 17.0,
+      "kd": 1.0,
       "weapon_stats": [
         {
           "weapon": "AK47",
@@ -597,10 +597,10 @@
       "best_t_weapon": "AK47",
       "best_t_hs": "47%",
       "best_ct_weapon": "M4A1-S",
-      "best_ct_hs": "41%",
+      "best_ct_hs": "38%",
       "weapon_note": "Most-used weapon overall is the P90 - tracks with a support role that plays a lot of eco and force-buy rounds rather than always full rifle economy.",
       "avatar": "assets/sandz.jpg",
-      "kd": 9.99,
+      "kd": 0.78,
       "weapon_stats": [
         {
           "weapon": "PYVATE VIA TT PATS T",
@@ -891,14 +891,14 @@
       "t_role": "Second entry/lurk",
       "ct_detail": "Flexible position, held for the late-round 1v1/1v2.",
       "t_detail": "Second entry or lurk, depending on the call.",
-      "good": "Best clutch numbers on the team (80% 1v1, 36% 1v3)",
-      "note": "12 games now - solid sample emerging. Clutch instinct is real (33% 1v1), but keep monitoring consistency through 30+ game mark",
+      "good": "Best clutch numbers on the team by a wide margin (88% 1v1, 31% 1v3) - small sample but the trend keeps holding.",
+      "note": "15 games now - tier still reads Low until he crosses 50, the sample math hasn't caught up to the numbers yet. Rating's up to 1.41 and the clutch instinct looks real, but treat it as promising, not proven.",
       "note_type": "goal",
       "best_t_weapon": "AK47",
-      "best_t_hs": "68%",
+      "best_t_hs": "65%",
       "best_ct_weapon": "M4A4",
-      "best_ct_hs": "67%",
-      "weapon_note": "Near-identical HS% on both rifles - strong on whichever side he's on, though still a small sample like everything else with him.",
+      "best_ct_hs": "54%",
+      "weapon_note": "AK47 is humming at 65% HS but M4A4 has dipped to 54% on just 39 kills - too small a CT rifle sample to read much into yet, worth rechecking once he's logged more CT reps.",
       "avatar": "assets/sy.jpg",
       "hltv_rating": 1.41,
       "weapon_stats": [
@@ -1190,22 +1190,22 @@
     {
       "name": "Treb",
       "role": "Anchor",
-      "games": 54,
+      "games": 63,
       "tier": "med",
       "ct_role": "Solo site hold",
       "t_role": "Lurk/late support",
       "ct_detail": "Solo holds a site with util backing.",
       "t_detail": "Lurks rather than entries - plays off the clutch instinct.",
-      "good": "Strongest CT numbers in the squad, solid 1v1 clutch rate (63%)",
-      "note": "Clear gap between CT entry (56%) and T entry (40%) - biggest split on the team",
+      "good": "Strongest CT numbers in the squad, solid 1v1 clutch rate (70%)",
+      "note": "Clear gap between CT entry (58%) and T entry (41%) - biggest split on the team",
       "note_type": "warn",
       "best_t_weapon": "AK47",
-      "best_t_hs": "58%",
+      "best_t_hs": "59%",
       "best_ct_weapon": "M4A1-S",
       "best_ct_hs": "37%",
-      "weapon_note": "Big gap between rifles (58% vs 37% HS) - AK is clearly the stronger weapon, worth noting given the T-side positioning gap is separate from this and about entries, not aim.",
+      "weapon_note": "Big gap between rifles (59% vs 37% HS) - AK is clearly the stronger weapon, worth noting given the T-side positioning gap is separate from this and about entries, not aim.",
       "avatar": "assets/treb.jpg",
-      "kd": 0.99,
+      "kd": 1.01,
       "weapon_stats": [
         {
           "weapon": "AKAT",
@@ -1487,25 +1487,25 @@
   ],
   "chart_data": {
     "hltv_rating": {
-      "dP^": 1.25,
+      "dP^": 1.27,
       "rosso": 1.07,
+      "Sandz": 0.91,
       "Sy": 1.41,
-      "Sandz": 0.92,
-      "Treb": 1.13
+      "Treb": 1.14
     },
     "ct_entry_success": {
       "dP^": 58,
       "rosso": 47,
-      "Sy": 62,
-      "Sandz": 51,
-      "Treb": 56
+      "Sandz": 53,
+      "Sy": 66,
+      "Treb": 58
     },
     "t_entry_success": {
       "dP^": 50,
-      "rosso": 51,
-      "Sy": 56,
-      "Sandz": 45,
-      "Treb": 40
+      "rosso": 52,
+      "Sandz": 40,
+      "Sy": 63,
+      "Treb": 41
     }
   },
   "best_pairs": [
@@ -1517,12 +1517,12 @@
     {
       "title": "Most proven pairing",
       "players": "Treb + Sandz",
-      "reasoning": "50 games together, 50% win rate - the biggest sample of any duo on the team and a reliable break-even return. Makes sense as a CT-side anchor pair given both read a hold rather than force duels."
+      "reasoning": "63 games together, 57% win rate - the biggest sample of any duo on the team and a winning record, not just break-even anymore. Makes sense as a CT-side anchor pair given both read a hold rather than force duels."
     },
     {
       "title": "Entry duo",
       "players": "rosso + dP^",
-      "reasoning": "28 games together, 50% win rate - confirms what the individual stats already suggested. Best fragger paired with the most reliable trader, and the data backs it up as the T-side engine."
+      "reasoning": "30 games together, 53% win rate - confirms what the individual stats already suggested. Best fragger paired with the most reliable trader, and the data backs it up as the T-side engine."
     }
   ],
   "maps": [
