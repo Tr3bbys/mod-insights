@@ -3,7 +3,7 @@
     "version": "v11",
     "date": "16 Aug 2026",
     "changelog": "Screenshot stats refresh + commentary rewritten against the new numbers",
-    "weekly_focus": "Full squad refresh from new screenshots. Sy's tier actually reads Low now (still just 15 games) even though his underlying numbers keep climbing - the confidence math hasn't caught up yet. dP^ remains the most proven anchor at 1.27 HLTV over 249 games, and Treb's games count was quietly stale for a while (was showing 54, actually 63)."
+    "weekly_focus": "Sy's numbers keep climbing - best clutch rate on the team (88% 1v1) and rating up to 1.41 - but it's still just 15 games, so tier reads Low until that sample grows. dP^ remains the most proven anchor at 1.27 HLTV over 249 games. Sandz's CT-side reads are clearly there (53% entry success) - aim is still the main gap to close."
   },
   "tiers": {
     "high": {
