@@ -305,6 +305,8 @@ export function generateOverallForm() {
     document.getElementById('js-form-result').innerHTML = `
         <span class="result">${wins}-${losses}</span> Last ${totalGames} games. ${win_rate}% win rate
     `;
+
+    document.getElementById('js-form-note').textContent = `${recent_form.mode} - ${recent_form.note}`;
 }
 
 export function generateByMapTable() {

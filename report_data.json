@@ -1671,72 +1671,62 @@
     ]
   },
   "recent_form": {
-    "mode": "Premier",
-    "note": "Based on Premier matchmaking results (ranked veto). Small sample per map, especially outside Dust II - read as an early signal, not settled form.",
+    "mode": "Club matches",
+    "note": "Tracked via the squad's Leetify Club view, running total since 26 Jul 2026. Still an early window - read as a signal, not settled form.",
+    "tracking": {
+      "since": "2026-07-26",
+      "through": "2026-08-15"
+    },
     "overall": {
       "wins": 5,
-      "losses": 4,
-      "win_rate": 56
+      "losses": 2,
+      "win_rate": 71
     },
     "matches": [
       {
-        "date": "15 hours ago",
+        "date": "09 Aug 2026",
         "map": "Dust II",
         "us": 13,
         "them": 9,
         "result": "W"
       },
       {
-        "date": "15 hours ago",
+        "date": "09 Aug 2026",
         "map": "Inferno",
         "us": 9,
         "them": 1,
         "result": "W"
       },
       {
-        "date": "16 hours ago",
+        "date": "09 Aug 2026",
         "map": "Dust II",
         "us": 13,
         "them": 5,
         "result": "W"
       },
       {
-        "date": "Yesterday",
-        "map": "Mirage",
-        "us": 11,
-        "them": 13,
-        "result": "L"
-      },
-      {
-        "date": "Yesterday",
-        "map": "Ancient",
-        "us": 7,
-        "them": 13,
-        "result": "L"
-      },
-      {
-        "date": "Fri, 7 Aug 26",
+        "date": "07 Aug 2026",
         "map": "Mirage",
         "us": 13,
         "them": 11,
         "result": "W"
       },
       {
-        "date": "Fri, 7 Aug 26",
+        "date": "07 Aug 2026",
         "map": "Anubis",
         "us": 10,
         "them": 13,
         "result": "L"
       },
       {
-        "date": "Fri, 7 Aug 26",
+        "date": "07 Aug 2026",
         "map": "Cache",
         "us": 11,
         "them": 13,
         "result": "L"
       },
       {
-        "date": "Fri, 7 Aug 26",
+        "date": "07 Aug 2026",
         "map": "Dust II",
         "us": 13,
         "them": 3,
@@ -1747,38 +1737,32 @@
       "Dust II": {
         "w": 3,
         "l": 0,
-        "win_rate": 100,
-        "games": 3
+        "games": 3,
+        "win_rate": 100
       },
       "Inferno": {
         "w": 1,
         "l": 0,
-        "win_rate": 100,
-        "games": 1
+        "games": 1,
+        "win_rate": 100
       },
       "Mirage": {
         "w": 1,
-        "l": 1,
-        "win_rate": 50,
-        "games": 2
-      },
-      "Ancient": {
-        "w": 0,
-        "l": 1,
-        "win_rate": 0,
-        "games": 1
+        "l": 0,
+        "games": 1,
+        "win_rate": 100
       },
       "Anubis": {
         "w": 0,
         "l": 1,
-        "win_rate": 0,
-        "games": 1
+        "games": 1,
+        "win_rate": 0
       },
       "Cache": {
         "w": 0,
         "l": 1,
-        "win_rate": 0,
-        "games": 1
+        "games": 1,
+        "win_rate": 0
       }
     }
   }
